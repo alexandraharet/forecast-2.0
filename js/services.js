@@ -17,9 +17,9 @@ weatherApp.service('weatherService', ['$resource', function($resource) {
 }]);
 
 
-weatherApp.service('timeframeService', ['$scope' function($scope) {
+weatherApp.service('timeframeService', ['$scope', function($scope) {
     this.timeframe = "24h";
     this.changeTimeframe = function(timeframe){
-        $scope.
+
     }
 }]);
