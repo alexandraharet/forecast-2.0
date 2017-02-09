@@ -14,18 +14,6 @@ weatherApp.config(['$routeProvider', '$locationProvider', '$sceDelegateProvider'
     .when('/forecast', {
         templateUrl: 'pages/forecast.html',
         controller: 'forecastController'
-    })
-    .when('/:days', {
-        templateUrl: 'pages/home.html',
-        controller: 'homeController'
-    })
-    .when('/:days', {
-        templateUrl: 'pages/home.html',
-        controller: 'homeController'
-    })
-    .when('/:days', {
-        templateUrl: 'pages/home.html',
-        controller: 'homeController'
     });
 
     // enable html5Mode for pushstate ('#'-less URLs)

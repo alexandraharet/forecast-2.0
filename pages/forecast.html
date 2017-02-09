@@ -1,25 +1,35 @@
 Forecast for {{ formattedAddress() }}
 
 <hr />
+
+<div ng-controller="timeframeController">
+
 <div class="row">
     <div class="col-md-12">
-        <a href="#/forecast/24h">24 hours</a> | <a href="#/forecast/3days">3 days</a> | <a href="#/forecast/7days">7 days</a>
+        <a ng-click="timeframe = '24h'">24 hours</a> |
+        <a ng-click="timeframe = '3days'">3 days</a> |
+        <a ng-click="timeframe = '7days'">7 days</a> |
+
     </div>
 </div>
 <hr />
-    <div class="row">
-        <div class="col-md-4" ng-repeat="w in weatherResult.hourly.data">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{ convertToDate(w.time) | date: 'H:mm' }} (my time)</h3>
-                </div>
-                <div class="panel-body">
-                    <img src="img/{{w.icon}}.png" />
-                    <p>Temperature: {{ convertToCelsius(w.temperature) }}&deg;</p>
-                    <p>Feels like: {{ convertToCelsius(w.apparentTemperature)}}&deg;</p>
-                    <p>Chance of precipit.: {{ convertToPercentage(w.precipProbability) }}%</p>
-                    <p>Wind speed: {{ w.windSpeed }} km/h</p>
-                </div>
-            </div>
+    <div class="row" ng-switch on="timeframe">
+
+
+        <div ng-switch-when="24h">
+        <div class="col-md-12">Weather forecast for the next 24 hours:</div>
+
+        <div class="col-md-4" ng-repeat="w in [weatherResult.hourly.data[0], weatherResult.hourly.data[1], weatherResult.hourly.data[2]] track by $index">
+            <weather-report weather-result="w" convert-to-standard="convertToCelsius(temperature)" convert-to-date="convertToDate(date)" convert-to-percentage="convertToPercentage(precip)" date-format="HH:mm" timeframe="{{timeframe}}"></weather-report>
         </div>
+
+        </div>
+
+
+
+        <div ng-switch-when="3days">3 days</div>
+        <div ng-switch-when="7days">7 days</div>
+
+
     </div>
+</div>
