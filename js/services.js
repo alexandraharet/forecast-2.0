@@ -19,6 +19,6 @@ weatherApp.service('addressService', ['$resource', function($resource) {
 weatherApp.service('weatherService', ['$resource', function($resource) {
     this.getWeather = function(lat, lon) {
         var weatherAPI = $resource('https://api.darksky.net/forecast/2cb2a6600011ce4ca629efa9e07cc9bd/:latlong', {jsonpCallbackParam: 'callback'}, {get:{method:'JSONP'}});
-        return weatherAPI.get({latlong: lat+","+lon, exclude: 'minutely,daily,flags'});
+        return weatherAPI.get({latlong: lat+","+lon, exclude: 'minutely,flags'});
     }
 }]);

@@ -1,0 +1,13 @@
+<div>
+    <div>
+        <img src="img/{{weatherResult.icon}}.png" />
+        <p>Temperature: {{ convertToStandard( { temperature: weatherResult.currently.temperature } ) }}&deg;</p>
+        <p>Feels like: {{ convertToStandard( { temperature: weatherResult.currently.apparentTemperature } )}}&deg;</p>
+        <p>Chance of precipit.: {{ convertToPercentage( { precip: weatherResult.currently.precipProbability } ) }}%</p>
+        <p>Wind speed: {{ weatherResult.currently.windSpeed }} km/h</p>
+    </div>
+
+</div>
+
+// {{ weatherResult.hourly.data[0].summary }}
+// {{ convertToDate( { date: weatherResult.time } ) | date: dateFormat }} (my time)

@@ -19,6 +19,7 @@ weatherApp.controller('forecastController', ['$scope', '$route', 'addressService
           $scope.lat = data.results[0].geometry.location.lat;
           $scope.lon = data.results[0].geometry.location.lng;
           $scope.weatherResult = weatherService.getWeather($scope.lat, $scope.lon);
+          console.log($scope.weatherResult);
       });
 
     $scope.convertToCelsius = function(Fah) {
@@ -35,15 +36,7 @@ weatherApp.controller('forecastController', ['$scope', '$route', 'addressService
 
 }]);
 
-weatherApp.controller('timeframeController', ['$scope', 'weatherService', function($scope, weatherService) {
-
-    weatherService.getWeather("44.439663", "26.096306").$promise
-      .then(function(data) {
-          //var utcTime = moment().tz("Etc/UTC");
-          $scope.timezone = $scope.weatherResult.timezone;
-          //$scope.hour = utcTime.tz($scope.timezone);
-          console.log($scope.timezone);
-      });
+weatherApp.controller('timeframeController', ['$scope', function($scope) {
 
     $scope.timeframe = "24h";
     $scope.changeTimeframe = function(t){

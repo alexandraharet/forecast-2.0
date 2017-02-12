@@ -1,0 +1,13 @@
+<div >
+
+    <div >
+        <h3 >{{ convertToDate( { date: weatherResult.time } ) | date: dateFormat }} (my time)</h3>
+    </div>
+    <div >
+        <img src="img/{{weatherResult.icon}}.png" />
+        <p style="font-size: 22px;"><span> {{ convertToStandard( { temperature: weatherResult.temperatureMin } ) }}&deg;</span> / <span class="text-muted">{{ convertToStandard( { temperature: weatherResult.temperatureMax } )}}&deg; </span></p>
+        <p>Chance of precipit.: {{ convertToPercentage( { precip: weatherResult.precipProbability } ) }}%</p>
+        <p>Wind speed: {{ weatherResult.windSpeed }} km/h</p>
+    </div>
+
+</div>
