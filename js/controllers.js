@@ -1,53 +1,54 @@
 // controllers
 
-weatherApp.controller('homeController', ['$scope', '$location', 'addressService', function($scope, $location, addressService) {
+weatherApp.controller('homeController', ['$scope', '$location', 'addressService', 'weatherService', function($scope, $location, addressService, weatherService) {
     $scope.address = addressService.address;
-    $scope.$watch('address', function() {
+    $scope.$watch("address", function (newValue) {
         addressService.address = $scope.address;
+        console.log("Watched! $scope.address is " + $scope.address);
     });
     $scope.submit = function() {
-        $location.path("/forecast");
+        $scope.submitted = true;
+        addressService.getLatLong($scope.address).$promise
+        .then(function(data) {
+            console.log($scope.address);
+            $scope.formattedAddress = function() {
+                return (data.results["0"].formatted_address);
+            }
+            $scope.lat = data.results[0].geometry.location.lat;
+            $scope.lon = data.results[0].geometry.location.lng;
+            $scope.weatherResult = weatherService.getWeather($scope.lat, $scope.lon);
+        });
     }
+
 }]);
 
 weatherApp.controller('forecastController', ['$scope', '$route', 'addressService', 'weatherService', function($scope, $route, addressService, weatherService) {
-    addressService.getLatLong(addressService.address).$promise
-    .then(function(data) {
-          $scope.formattedAddress = function() {
-            return (data.results["0"].formatted_address);
-          }
-          $scope.lat = data.results[0].geometry.location.lat;
-          $scope.lon = data.results[0].geometry.location.lng;
-          $scope.weatherResult = weatherService.getWeather($scope.lat, $scope.lon);
-          console.log($scope.weatherResult);
-      });
+
 
     $scope.convertToCelsius = function(Fah) {
-      return Math.round((Fah - 32)/1.8);
+        return Math.round((Fah - 32)/1.8);
     }
 
     $scope.convertToDate = function(time) {
-      return new Date(time * 1000);
+        return new Date(time * 1000);
     }
 
     $scope.convertToPercentage = function(num) {
-      return Math.round(num * 100);
+        return Math.round(num * 100);
     }
 
 }]);
 
-weatherApp.controller('timeframeController', ['$scope', function($scope) {
-
-    $scope.timeframe = "24h";
-    $scope.changeTimeframe = function(t){
-        $scope.timeframe = t;
-        return $scope.timeframe;
-    }
-
-    $scope.$watch('timeframe', function(timeframe) {
-        console.log(timeframe); // TODO: remove
-    });
 
 
+// not used
+/*
+weatherApp.controller('timeframeController', ['$scope', 'addressService', function($scope, addressService) {
 
+$scope.timeframe = "24h";
+$scope.changeTimeframe = function(t){
+$scope.timeframe = t;
+return $scope.timeframe;
+}
 }])
+*/
