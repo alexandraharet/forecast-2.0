@@ -1,5 +1,14 @@
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
 
+.show-hide {
+  transition: all linear 0.5s;
+}
+.show-hide.ng-hide {
+  opacity: 0;
+}
 
 #location {
   font-weight:bold;

@@ -10,8 +10,6 @@ weatherApp.directive("weatherReportHourly", function() {
             convertToStandard: "&",
             convertToDate: "&",
             convertToPercentage: "&",
-            dateFormat: "@",
-            timeframe: "@"
         }
     }
 });
@@ -26,8 +24,6 @@ weatherApp.directive("weatherReportDaily", function() {
             convertToStandard: "&",
             convertToDate: "&",
             convertToPercentage: "&",
-            dateFormat: "@",
-            timeframe: "@"
         }
     }
 });

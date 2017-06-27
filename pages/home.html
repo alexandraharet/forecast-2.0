@@ -25,7 +25,7 @@
                         <div ng-switch-default>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h4>Right now: {{ weatherResult.currently.summary }} </h4>
+                                    <h4 >Right now: {{ weatherResult.currently.summary }} </h4>
                                 </div>
                             </div>
 
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <hr />
-                        <div class="row text-center">
+                        <div class="row text-center" >
                             <div class="col-sm-2" ng-repeat="w in
                             [
                             weatherResult.daily.data[2],
@@ -83,7 +83,7 @@
                             weatherResult.daily.data[6],
                             weatherResult.daily.data[7]
                             ] track by $index">
-                            <weather-report-daily weather-result="w" convert-to-standard="convertToCelsius(temperature)" convert-to-date="convertToDate(date)" convert-to-percentage="convertToPercentage(precip)" date-format="EEEE" timeframe="{{timeframe}}"></weather-report-daily>
+                            <weather-report-daily weather-result="w" convert-to-standard="convertToCelsius(temperature)" convert-to-date="convertToDate(date)" convert-to-percentage="convertToPercentage(precip)" date-format="EEEE" timeframe="{{timeframe}}"> </weather-report-daily>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ convertToDate( { date: weatherResult.time } ) | date: dateFormat }} (my time)</h3>
+    </div>
+    <div class="panel-body">
+        <img src="img/{{weatherResult.icon}}.png" />
+        <p>Temperature: {{ convertToStandard( { temperature: weatherReport.temperature } ) }}&deg;</p>
+        <p>Feels like: {{ convertToStandard( { temperature: weatherReport.apparentTemperature } )}}&deg;</p>
+        <p>Chance of precipit.: {{ convertToPercentage( { precip: weatherReport.precipProbability } ) }}%</p>
+        <p>Wind speed: {{ weatherReport.windSpeed }} km/h</p>
+    </div>
+
+</div>
