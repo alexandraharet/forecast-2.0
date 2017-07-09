@@ -1,0 +1,127 @@
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.show-hide {
+  transition: all linear 0.5s;
+}
+.show-hide.ng-hide {
+  opacity: 0;
+}
+
+#location {
+  font-weight:bold;
+}
+
+.col-xs-5 {
+  min-width: 275px !important;
+}
+
+#address {
+  width: 235px;
+  max-width:70%;
+}
+
+
+#icon {
+  display: block;
+  width: 70%;
+  text-align: left;
+}
+
+
+.js-hiddenContent {
+  display: none;
+}
+
+.search-button {
+  border: 0px;
+  width: 26px;
+  height: 26px;
+  float: right;
+  position: absolute;
+  background: none;
+  padding: 0px;
+  margin: 0 0 0 -30px;
+}
+
+.box {
+  border-radius: 10px;
+  padding: 15px;
+  margin: 15px;
+  max-width: 650px;
+  background: #D1F2EB;
+  background: linear-gradient(#A3E4D7, #D1F2EB, #A3E4D7);
+}
+
+.night {
+  background: linear-gradient(#2C3E50, #808B96, #2C3E50);
+  color: #fff;
+}
+
+.viewpanel {
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 100%;
+}
+
+.evenBox {
+  min-height: 100%;
+}
+
+.day {
+  background: linear-gradient(#EAECEE, #FFFFFF, #EAECEE);
+}
+
+.switch-field {
+  margin: 0px;
+  display: inline-block;
+  float: right;
+  width: 50px;
+}
+
+.switch-field input {
+  display: none;
+}
+
+.switch-field label {
+  float: left;
+  font-size: 10px;
+  max-width: 50%;
+  padding: 2px 10% 2px 10%;
+  display: inline-block;
+  background-color: #e4e4e4;
+  font-weight: normal;
+  text-align: center;
+  text-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition:    all 0.2s ease-in-out;
+  -ms-transition:     all 0.2s ease-in-out;
+  -o-transition:      all 0.2s ease-in-out;
+  transition:         all 0.2s ease-in-out;
+}
+
+.switch-field label:hover {
+	cursor: pointer;
+}
+
+.switch-field input:checked + label {
+  background-color: #76D7C4;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+  border-radius: 0 4px 4px 0;
+}

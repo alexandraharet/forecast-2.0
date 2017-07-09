@@ -1,5 +1,6 @@
 *.txt
 *.zip
+gulpfile.js
 bootstrap-3.3.6-dist/
 local/
 node_modules/

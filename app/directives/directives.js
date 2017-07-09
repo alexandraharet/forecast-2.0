@@ -11,7 +11,7 @@ weatherApp.directive("weatherReportHourly", function() {
             convertToDate: "&",
             convertToPercentage: "&",
         }
-    }
+    };
 });
 
 weatherApp.directive("weatherReportDaily", function() {
@@ -25,5 +25,5 @@ weatherApp.directive("weatherReportDaily", function() {
             convertToDate: "&",
             convertToPercentage: "&",
         }
-    }
+    };
 });

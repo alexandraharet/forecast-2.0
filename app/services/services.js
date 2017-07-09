@@ -15,7 +15,7 @@ weatherApp.service('addressService', ['$resource', function($resource) {
             address: address,
             key: 'AIzaSyBvzrK2_Fr84Od185gbDGxlpRapNcJE4BY'
         });
-    }
+    };
 }]);
 
 
@@ -26,5 +26,5 @@ weatherApp.service('weatherService', ['$resource', function($resource) {
             latlong: lat+","+lon,
             exclude: 'minutely,flags'
         });
-    }
+    };
 }]);
