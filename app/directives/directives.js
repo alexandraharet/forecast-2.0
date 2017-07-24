@@ -1,6 +1,8 @@
 // directives
 
-weatherApp.directive("weatherReportHourly", function() {
+angular
+    .module('weatherApp')
+    .directive("weatherReportHourly", function() {
     return {
         restrict: "E",
         templateUrl: "templates/weatherReportHourly.html",
@@ -14,7 +16,9 @@ weatherApp.directive("weatherReportHourly", function() {
     };
 });
 
-weatherApp.directive("weatherReportDaily", function() {
+angular
+    .module('weatherApp')
+    .directive("weatherReportDaily", function() {
     return {
         restrict: "E",
         templateUrl: "templates/weatherReportDaily.html",

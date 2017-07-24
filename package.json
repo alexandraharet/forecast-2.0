@@ -16,7 +16,12 @@
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
     "gulp-serve": "^1.4.0",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify": "^3.0.0",
+    "jasmine": "^2.6.0",
+    "jasmine-core": "^2.6.4",
+    "karma": "^1.7.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
