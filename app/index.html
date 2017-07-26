@@ -68,7 +68,7 @@
 								<div ng-switch-default>
 									<div class="row">
 										<div class="col-md-12">
-											<h4>Right now: {{ forecastCtrl.weatherResult.currently.summary }} </h4>
+											<h4>Right now: {{ addressCtrl.weatherResult.currently.summary }} </h4>
 										</div>
 									</div>
 
@@ -77,9 +77,9 @@
 											<img src="img/{{weatherResult.currently.icon}}.png" />
 										</div>
 										<div class="col-sm-10">
-											<h3>{{ forecastCtrl.convertToCelsius(weatherResult.currently.temperature) }}&deg;C  <small> / feels like: {{ forecastCtrl.convertToCelsius(weatherResult.currently.apparentTemperature)}}&deg;C</small></h3>
-											<p>Precipitation: {{ forecastCtrl.convertToPercentage(weatherResult.currently.precipProbability) }}%</p>
-											<p>Wind speed: {{ forecastCtrl.weatherResult.currently.windSpeed }} km/h</p>
+											<h3>{{ addressCtrl.convertToCelsius(weatherResult.currently.temperature) }}&deg;C  <small> / feels like: {{ addressCtrl.convertToCelsius(weatherResult.currently.apparentTemperature)}}&deg;C</small></h3>
+											<p>Precipitation: {{ addressCtrl.convertToPercentage(weatherResult.currently.precipProbability) }}%</p>
+											<p>Wind speed: {{ addressCtrl.weatherResult.currently.windSpeed }} km/h</p>
 										</div>
 									</div>
 									<hr />

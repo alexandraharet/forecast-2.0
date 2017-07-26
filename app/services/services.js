@@ -13,7 +13,7 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
     .module('weatherApp')
     .factory('addressService', service);
 
-    function service($http) {
+    function service($http, $resource) {
 
         var exports = {
             callLocationApi: callLocationApi,
@@ -43,15 +43,14 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
         }
 
         function callWeatherApi(lat, lon) {
-            // return $http.get('https://api.darksky.net/forecast/2cb2a6600011ce4ca629efa9e07cc9bd/' + coordinates + '?exclude=minutely,flags');
             return $http({
                 url: 'php/forecast.php',
-                type: 'GET',
-                data: {
+                method: 'get',
+                params: {
                     lat: lat,
-                  lon: lon
-                  //units: currentUnitSystem.systemName // TODO
-              },
+                    lon: lon
+                    },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             });
         }
         // function getWeather (lat, lon)
