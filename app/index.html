@@ -74,11 +74,11 @@
 
 									<div class="row">
 										<div class="col-sm-2">
-											<img src="img/{{weatherResult.currently.icon}}.png" />
+											<img src="img/{{addressCtrl.weatherResult.currently.icon}}.png" />
 										</div>
 										<div class="col-sm-10">
-											<h3>{{ addressCtrl.convertToCelsius(weatherResult.currently.temperature) }}&deg;C  <small> / feels like: {{ addressCtrl.convertToCelsius(weatherResult.currently.apparentTemperature)}}&deg;C</small></h3>
-											<p>Precipitation: {{ addressCtrl.convertToPercentage(weatherResult.currently.precipProbability) }}%</p>
+											<h3>{{ addressCtrl.convertToCelsius(addressCtrl.weatherResult.currently.temperature) }}&deg;C  <small> / feels like: {{ addressCtrl.convertToCelsius(addressCtrl.weatherResult.currently.apparentTemperature)}}&deg;C</small></h3>
+											<p>Precipitation: {{ addressCtrl.convertToPercentage(addressCtrl.weatherResult.currently.precipProbability) }}%</p>
 											<p>Wind speed: {{ addressCtrl.weatherResult.currently.windSpeed }} km/h</p>
 										</div>
 									</div>
