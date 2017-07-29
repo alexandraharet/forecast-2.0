@@ -74,7 +74,7 @@
 
 									<div class="row">
 										<div class="col-sm-2">
-											<img src="img/{{addressCtrl.weatherResult.currently.icon}}.png" />
+											<img src="img/{{addressCtrl.weatherResult.currently.icon}}.png?<?php echo filemtime('image.jpg') ?>" />
 										</div>
 										<div class="col-sm-10">
 											<h3>{{ forecastCtrl.convertToCelsius(addressCtrl.weatherResult.currently.temperature) }}&deg;C  <small> / feels like: {{ forecastCtrl.convertToCelsius(addressCtrl.weatherResult.currently.apparentTemperature)}}&deg;C</small></h3>
