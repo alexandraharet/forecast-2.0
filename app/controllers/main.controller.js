@@ -2,7 +2,7 @@
 	'use strict';
 	angular
 	.module('weatherApp')
-	.controller('addressController', controller);
+	.controller('mainController', controller);
 
 	function controller($rootScope, $scope, addressService, weatherService) {
 
@@ -10,6 +10,8 @@
 		var vm = this;
 
 		vm.address = "";
+		vm.submitted = false;
+
 		vm.weatherResult = undefined;
 		vm.formattedAddress = undefined;
 
@@ -34,5 +36,27 @@
 						});
 				});
 			};
+
+			vm.convertToCelsius = function(Fah) {
+				if(Fah)
+				return Math.round((Fah - 32)/1.8);
+				else
+				return null;
+			};
+
+			vm.convertToDate = function(time) {
+				if(time)
+				return new Date(time * 1000);
+				else
+				return null;
+			};
+
+			vm.convertToPercentage = function(num) {
+				if(num)
+				return Math.round(num * 100);
+				else
+				return null;
+			};
+
 	}
 })();
