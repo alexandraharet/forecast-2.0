@@ -16,19 +16,20 @@
 	<script src="https://code.angularjs.org/1.6.2/angular-resource.min.js"></script>
 	<script src="https://code.angularjs.org/1.6.2/angular-animate.js"></script> -->
 
+	<script
+  src="http://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.js"></script>
 	<script src="bower_components/angular-animate/angular-animate.js"></script>
 
-
-
-
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="services/services.js"></script>
 	<script type="text/javascript" src="directives/directives.js"></script>
-	<script type="text/javascript" src="controllers/address.controller.js"></script>
-	<script type="text/javascript" src="controllers/forecast.controller.js"></script>
+	<script type="text/javascript" src="controllers/main.controller.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -41,23 +42,24 @@
 
 	<div class="container">
 
-		<div class="row" ng-controller="addressController as addressCtrl">
+		<div class="row" ng-controller="mainController as mainCtrl">
+
 			<div class="col-md-6 col-md-offset-3" >
 				<h4 class='mytitle'>Forecast by City </h4>
-				<form ng-submit="addressCtrl.submit()">
-					<input type="text" ng-model="addressCtrl.address" class="form-control" />
+				<form ng-submit="mainCtrl.submit()">
+					<input type="text" ng-model="mainCtrl.address" class="form-control" />
 					<input type="submit" value="Get forecast" class="btn btn-primary" />
 				</form>
 
-				<div ng-controller="forecastController as forecastCtrl" ng-cloak >
+				<div ng-cloak ng-show="mainCtrl.address && mainCtrl.submitted" id='mainPanel'>
 
 					<div ng-switch on="timeframe">
 						<div class="panel panel-default">
 
-							<div class="panel-body show-hide" ng-show="addressCtrl.submitted">
+							<div class="panel-body show-hide">
 								<div class="row">
 									<div class="col-md-6">
-										<h3>{{ addressCtrl.formattedAddress }}</h3>
+										<h3>{{ mainCtrl.formattedAddress }}</h3>
 									</div>
 									<div class="col-md-6">
 										<a ng-click="timeframe = '24h'">Right now</a> |
@@ -68,65 +70,55 @@
 								<div ng-switch-default>
 									<div class="row">
 										<div class="col-md-12">
-											<h4>Right now: {{ addressCtrl.weatherResult.currently.summary }} </h4>
+											<h4>Right now: {{ mainCtrl.weatherResult.currently.summary }} </h4>
 										</div>
 									</div>
 
 									<div class="row">
 										<div class="col-sm-2">
-											<img src="img/{{addressCtrl.weatherResult.currently.icon}}.png?<?php echo filemtime('image.jpg') ?>" />
+											<img src="img/{{mainCtrl.weatherResult.currently.icon}}.png?<?php echo filemtime('image.jpg') ?>" />
 										</div>
 										<div class="col-sm-10">
-											<h3>{{ forecastCtrl.convertToCelsius(addressCtrl.weatherResult.currently.temperature) }}&deg;C  <small> / feels like: {{ forecastCtrl.convertToCelsius(addressCtrl.weatherResult.currently.apparentTemperature)}}&deg;C</small></h3>
-											<p>Precipitation: {{ forecastCtrl.convertToPercentage(addressCtrl.weatherResult.currently.precipProbability) }}%</p>
-											<p>Wind speed: {{ addressCtrl.weatherResult.currently.windSpeed }} km/h</p>
+											<h3>{{ mainCtrl.convertToCelsius(mainCtrl.weatherResult.currently.temperature) }}&deg;C  <small> / feels like: {{ mainCtrl.convertToCelsius(mainCtrl.weatherResult.currently.apparentTemperature)}}&deg;C</small></h3>
+											<p>Precipitation: {{ mainCtrl.convertToPercentage(mainCtrl.weatherResult.currently.precipProbability) }}%</p>
+											<p>Wind speed: {{ mainCtrl.weatherResult.currently.windSpeed }} km/h</p>
 										</div>
 									</div>
 									<hr />
 									<div class="row text-center">
-
-										<div class="col-sm-2" ng-repeat="w in
-										[
-										addressCtrl.weatherResult.hourly.data[1],
-										addressCtrl.weatherResult.hourly.data[2],
-										addressCtrl.weatherResult.hourly.data[3],
-										addressCtrl.weatherResult.hourly.data[4],
-										addressCtrl.weatherResult.hourly.data[5],
-										addressCtrl.weatherResult.hourly.data[6],
-										] track by $index">
-										<weather-report-hourly weather-result="w" convert-to-standard="forecastCtrl.convertToCelsius(temperature)" convert-to-date="forecastCtrl.convertToDate(date)" convert-to-percentage="forecastCtrl.convertToPercentage(precip)" date-format="HH:mm" timeframe="{{timeframe}}"></weather-report-hourly>
-									</div>
+										<wf-weather-wrapper weather-result="mainCtrl.weatherResult">
+										</wf-weather-wrapper>
 								</div>
 							</div>
 
 							<div ng-switch-when="7days">
 								<div class="row">
 									<div class="col-md-12">
-										<h4>Today ({{ forecastCtrl.convertToDate(addressCtrl.weatherResult.daily.data[1].time) | date: "EEE" }}): {{ addressCtrl.weatherResult.daily.data[1].summary }} </h4>
+										<h4>Today ({{ mainCtrl.convertToDate(mainCtrl.weatherResult.daily.data[1].time) | date: "EEE" }}): {{ mainCtrl.weatherResult.daily.data[1].summary }} </h4>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-2">
-										<img src="img/{{addressCtrl.weatherResult.daily.data[0].icon}}.png" />
+										<img src="img/{{mainCtrl.weatherResult.daily.data[0].icon}}.png" />
 									</div>
 									<div class="col-sm-10">
-										<h3>Min: {{ forecastCtrl.convertToCelsius(addressCtrl.weatherResult.daily.data[1].temperatureMin) }}&deg;C  <span class="text-muted"> / Max: {{ forecastCtrl.convertToCelsius(addressCtrl.weatherResult.daily.data[1].temperatureMax)}}&deg;C</span></h3>
-										<p>Precipitation: {{ forecastCtrl.convertToPercentage(addressCtrl.weatherResult.daily.data[1].precipProbability) }}%</p>
-										<p>Wind speed: {{ addressCtrl.weatherResult.daily.data[1].windSpeed }} km/h</p>
+										<h3>Min: {{ mainCtrl.convertToCelsius(mainCtrl.weatherResult.daily.data[1].temperatureMin) }}&deg;C  <span class="text-muted"> / Max: {{ mainCtrl.convertToCelsius(mainCtrl.weatherResult.daily.data[1].temperatureMax)}}&deg;C</span></h3>
+										<p>Precipitation: {{ mainCtrl.convertToPercentage(mainCtrl.weatherResult.daily.data[1].precipProbability) }}%</p>
+										<p>Wind speed: {{ mainCtrl.weatherResult.daily.data[1].windSpeed }} km/h</p>
 									</div>
 								</div>
 								<hr />
 								<div class="row text-center" >
 									<div class="col-sm-2" ng-repeat="w in
 									[
-									addressCtrl.weatherResult.daily.data[2],
-									addressCtrl.weatherResult.daily.data[3],
-									addressCtrl.weatherResult.daily.data[4],
-									addressCtrl.weatherResult.daily.data[5],
-									addressCtrl.weatherResult.daily.data[6],
-									addressCtrl.weatherResult.daily.data[7]
+									mainCtrl.weatherResult.daily.data[2],
+									mainCtrl.weatherResult.daily.data[3],
+									mainCtrl.weatherResult.daily.data[4],
+									mainCtrl.weatherResult.daily.data[5],
+									mainCtrl.weatherResult.daily.data[6],
+									mainCtrl.weatherResult.daily.data[7]
 									] track by $index">
-									<weather-report-daily weather-result="w" convert-to-standard="forecastCtrl.convertToCelsius(temperature)" convert-to-date="forecastCtrl.convertToDate(date)" convert-to-percentage="forecastCtrl.convertToPercentage(precip)" date-format="EEEE" timeframe="{{timeframe}}"> </weather-report-daily>
+									<weather-report-daily weather-result="w" convert-to-standard="mainCtrl.convertToCelsius(temperature)" convert-to-date="mainCtrl.convertToDate(date)" convert-to-percentage="mainCtrl.convertToPercentage(precip)" date-format="EEEE" timeframe="{{timeframe}}"> </weather-report-daily>
 								</div>
 							</div>
 						</div>

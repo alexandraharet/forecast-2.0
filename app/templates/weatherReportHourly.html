@@ -1,7 +1,19 @@
-    <div>
+<!-- <div weather-result="w" convert-to-standard="convertToCelsius(temperature)" convert-to-date="convertToDate(date)" convert-to-percentage="convertToPercentage(precip)" date-format="HH:mm" timeframe="{{timeframe}}">
+
         <p>{{ convertToDate( { date: weatherResult.time } ) | date: dateFormat }} (my time)</p>
         <img src="img/{{weatherResult.icon}}.png" style="max-width: 50px; height: auto;"/>
         <p>{{ weatherResult.summary }}</p>
         <p>{{ convertToStandard( { temperature: weatherResult.temperature } ) }}&deg;C / <span class="text-muted">{{ convertToStandard( { temperature: apparentTemperature } )}}&deg;C</p>
+</div> -->
 
-    </div>
+
+<div>
+    Some weather:
+    <!-- convert-to-standard="forecastCtrl.convertToCelsius(temperature)"
+    convert-to-date="forecastCtrl.convertToDate"
+    convert-to-percentage="forecastCtrl.convertToPercentage" -->
+
+     <!-- {{addressCtrl.weatherResult.hourly.data[5].temperature}}
+
+  <p>{{ convertToStandard( { temperature: weatherResult.temperature } ) }}&deg;C / <span class="text-muted">{{ convertToStandard( { temperature: apparentTemperature } )}}&deg;C</p> -->
+</div>
