@@ -7,12 +7,8 @@ angular
         restrict: "E",
         templateUrl: "templates/weatherWrapper.html",
         scope: {
-            convertToStandard: "&",
-            convertToDate: "&",
-            convertToPercentage: "&",
-        },
-        controller: function($scope) {
-
+            weatherResult: "=",
+            convertToCelsius: "&"
         }
     };
 });
@@ -24,16 +20,32 @@ angular
         restrict: "E",
         templateUrl: "templates/weatherReportHourly.html",
         scope: {
-            weatherResult: "="
+            convertToCelsius: "&",
+            weather: "="
         },
+        replace: true,
         controller: function($scope) {
-            var weatherResult = $scope.weatherResult;
-            $scope.$watch(weatherResult,
-                function() {
-                    console.log('watch triggered');
-                    console.log(weatherResult);
-                });
-        }
+            var weatherData = {
+                time: $scope.weather.time,
+                summary: $scope.weather.summary,
+                icon: $scope.weather.icon,
+                temperature: $scope.weather.temperature,
+                feelsLike: $scope.weather.apparentTemperature,
+                precipitation: $scope.weather.precipProbability,
+                windSpeed: $scope.weather.windSpeed
+            };
+
+            var vm = this;
+            $scope.temperature = weatherData.temperature;
+
+            $scope.convert = function() {
+                console.log('convert() called');
+                $scope.temperature = weatherData.temperature;
+                $scope.convertToCelsius({temperature: $scope.temperature});
+                console.log($scope);
+            };
+        },
+        controllerAs: 'hourly'
     };
 });
 
@@ -43,11 +55,5 @@ angular
     return {
         restrict: "E",
         templateUrl: "templates/weatherReportDaily.html",
-        scope: {
-            weatherResult: "=",
-            convertToStandard: "&",
-            convertToDate: "&",
-            convertToPercentage: "&",
-        }
     };
 });

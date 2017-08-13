@@ -61,7 +61,10 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
     function service($http, $q) {
 
         var exports = {
-            callWeatherApi: callWeatherApi
+            callWeatherApi: callWeatherApi,
+            convertToCelsius: convertToCelsius,
+            convertToDate: convertToDate,
+            convertToPercentage: convertToPercentage
         };
 
         var weatherApiResponse;
@@ -86,6 +89,32 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
             }
             else deferred.reject('Error returing the weaherApi response');
             return deferred.promise;
+        }
+
+
+        function convertToCelsius(Fah) {
+            if(Fah) {
+                // console.log('called with: ' + Fah);
+                var temperature = Math.round((Fah - 32)/1.8);
+                console.log("$scope.temperature is: " + temperature);
+                return temperature;
+            } else {
+                return null;
+            }
+        }
+
+        function convertToDate(time) {
+            if(time)
+            return new Date(time * 1000);
+            else
+            return null;
+        }
+
+        function convertToPercentage(num) {
+            // if(num)
+            return Math.round(num * 100);
+            // else
+            // return null;
         }
 
         return exports;
