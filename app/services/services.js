@@ -94,9 +94,7 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
 
         function convertToCelsius(Fah) {
             if(Fah) {
-                // console.log('called with: ' + Fah);
                 var temperature = Math.round((Fah - 32)/1.8);
-                console.log("$scope.temperature is: " + temperature);
                 return temperature;
             } else {
                 return null;
@@ -111,11 +109,26 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
         }
 
         function convertToPercentage(num) {
-            // if(num)
+            if(num)
             return Math.round(num * 100);
-            // else
-            // return null;
+            else
+            return null;
         }
+
+        // function convertToStandard(weatherResult) {
+        //     angular.forEach(properties in weatherResult, function(key, value) {
+        //         vm.renderResult.temperature =
+        //             weatherService.convertToCelsius(weatherResult.currently.apparentTemperature);
+        //         vm.renderResult.minTemp =
+        //             weatherService.convertToCelsius(weatherResult.daily.data[1].temperatureMin);
+        //         vm.renderResult.maxTemp =
+        //             weatherService.convertToCelsius(weatherResult.daily.data[1].temperatureMax);
+        //         vm.renderResult.date =
+        //             weatherService.convertToDate(weatherResult.daily.data[1].time);
+        //         vm.renderResult.precip =
+        //             weatherService.convertToPercentage(weatherResult.currently.precipProbability);
+        //     });
+        // }
 
         return exports;
     }

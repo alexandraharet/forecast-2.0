@@ -1,3 +1,7 @@
-<div ng-click="convert()">
-    Temperature: {{temperature}}
+<div>
+    <p>{{hourly.renderResult.time | date : 'ha'}}</p>
+    <h4>{{hourly.renderResult.summary}}</h4>
+    <img src="img/{{hourly.renderResult.icon}}.png" style="max-width: 90%; padding: 5%;"/>
+    <p>{{hourly.renderResult.temperature}}°C / <small>Feels Like: {{hourly.renderResult.feelsLike}}°C</small></p>
+    <p>Precipitation: {{hourly.renderResult.precipitation}}%</p>
 </div>
