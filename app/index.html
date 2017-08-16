@@ -8,7 +8,7 @@
 	<meta name="author" content="Alexandra Haret">
 
 	<title>Forecast project</title>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 
 	<!-- <script src="https://code.angularjs.org/1.6.2/angular.min.js"></script>
@@ -31,8 +31,9 @@
 	<script type="text/javascript" src="directives/directives.js"></script>
 	<script type="text/javascript" src="controllers/main.controller.js"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.5/moment-timezone-with-data.min.js"></script>
 
@@ -55,36 +56,34 @@
 						<div class="panel panel-default">
 
 							<div class="panel-body show-hide">
-								<div class="row">
-									<div class="col-xs-12">
-										<h3>{{ mainCtrl.formattedAddress }}</h3>
-									</div>
-									<div class="col-xs-12">
-										<a ng-click="timeframe = '24h'">Right now</a> |
-										<a ng-click="timeframe = '7days'">7 days</a>
-									</div>
+								<div class="row col">
+									<h3>{{ mainCtrl.formattedAddress }}</h3>
+								</div>
+								<div class="row col">
+									<a ng-click="timeframe = '24h'">Right now</a> |
+									<a ng-click="timeframe = '7days'">7 days</a>
 								</div>
 
 								<div ng-switch-default>
 									<div class="row w-header">
-										<div class="col-xs-12">
+										<div class="col">
 											<h4>Right now: {{ mainCtrl.renderResult.summary }} </h4>
 										</div>
 									</div>
 
 									<div class="row w-currently">
-										<div class="col-sm-3 col-xs-12">
+										<div class="col-md-3 col-sm-4 col-xs-12">
 											<img src="img/{{mainCtrl.renderResult.icon}}.png?<?php echo filemtime('image.jpg') ?>" />
 										</div>
-										<div class="col-sm-9 col-xs-12">
+										<div class="col-md-9 col-sm-8 col-xs-12">
 											<h3>{{ mainCtrl.renderResult.temperature }}&deg;C  <small> / feels like: {{ mainCtrl.renderResult.temperature}}&deg;C</small></h3>
 											<p>Precipitation: {{ mainCtrl.renderResult.precip }}%</p>
 											<p>Wind speed: {{ mainCtrl.renderResult.windSpeed }} km/h</p>
 										</div>
 									</div>
 									<hr />
-									<div class="row text-center w-hourly">
-										<wf-weather-wrapper
+									<div class="row align-items-center w-hourly">
+										<wf-weather-wrapper class="col-sm-4"
 											ng-if="mainCtrl.weatherResult"
 							      			weather-result="mainCtrl.weatherResult">
 										</wf-weather-wrapper>
