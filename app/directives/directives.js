@@ -15,7 +15,7 @@ angular
 
 angular
     .module('weatherApp')
-    .directive("wfWeatherReportHourly", ['weatherService', function(weatherService) {
+    .directive("wfWeatherReportHourly", ['weatherService', '$filter', function(weatherService, $filter) {
     return {
         restrict: "E",
         templateUrl: "templates/weatherReportHourly.html",
@@ -28,31 +28,22 @@ angular
             var vm = this;
             vm.renderResult = {};
 
-            convertToStandard(weatherData);
-
             function updatedWeatherData() {
                 weatherData = {
-                time: $scope.weather.time,
-                summary: $scope.weather.summary,
-                icon: $scope.weather.icon,
-                temperature: $scope.weather.temperature,
-                feelsLike: $scope.weather.apparentTemperature,
-                precipitation: $scope.weather.precipProbability,
-                windSpeed: $scope.weather.windSpeed
-            };
-            console.log(weatherData.summary);
+                    time: $scope.weather.time,
+                    summary: $scope.weather.summary,
+                    icon: $scope.weather.icon,
+                    temperature: $scope.weather.temperature,
+                    feelsLike: $scope.weather.apparentTemperature,
+                    precipitation: $scope.weather.precipProbability,
+                    windSpeed: $scope.weather.windSpeed,
+                };
             }
 
-            $scope.$watch('weather', function(){
-                updatedWeatherData();
-                convertToStandard(weatherData);
-                updateRenderedResult();
-            });
-
-
             function updateRenderedResult() {
+                vm.renderResult = {};
                 angular.forEach(weatherData, function(value, key) {
-                if(!vm.renderResult[key]) vm.renderResult[key] = value;
+                if(vm.renderResult[key] !== weatherData[key]) vm.renderResult[key] = value;
             });
             }
 
@@ -61,11 +52,18 @@ angular
                     weatherService.convertToCelsius(weatherResult.temperature);
                 vm.renderResult.feelsLike =
                     weatherService.convertToCelsius(weatherResult.feelsLike);
-                vm.renderResult.time =
+                vm.renderResult.localtime =
                     weatherService.convertToDate(weatherResult.time);
                 vm.renderResult.precipitation =
                     weatherService.convertToPercentage(weatherResult.precipitation);
             }
+
+            $scope.$watch('weather', function(){
+                updatedWeatherData();
+                updateRenderedResult();
+                convertToStandard(weatherData);
+            });
+
         },
         controllerAs: 'hourly'
     };
