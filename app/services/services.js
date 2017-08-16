@@ -22,10 +22,23 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
 
         var formattedAddress, coordinates, addressApiResponse;
 
+        // function getAddressFromApi(address) {
+        //     addressApiResponse = $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=api_key');
+        //     return addressApiResponse;
+        // }
+
         function getAddressFromApi(address) {
-            addressApiResponse = $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyBvzrK2_Fr84Od185gbDGxlpRapNcJE4BY');
+            addressApiResponse = $http({
+                url: 'php/coordinates.php',
+                method: 'get',
+                params: {
+                    address: address
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
             return addressApiResponse;
         }
+
 
         function callLocationApi(address) {
             var deferred = $q.defer();
@@ -37,14 +50,14 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
         }
 
         function getFormattedAddress(addressApiResponse) {
-            formattedAddress = addressApiResponse.data.results["0"].formatted_address;
+            formattedAddress = addressApiResponse.data.results[0].formatted_address;
             return formattedAddress;
         }
 
         function getCoordinates(addressApiResponse) {
             coordinates = {
-                lat: addressApiResponse.data.results["0"].geometry.location.lat,
-                lon: addressApiResponse.data.results["0"].geometry.location.lng
+                lat: addressApiResponse.data.results[0].geometry.location.lat,
+                lon: addressApiResponse.data.results[0].geometry.location.lng
             };
             return coordinates;
         }

@@ -1,4 +1,4 @@
-*.php
+/**/api-keys.php
 *.txt
 *.zip
 gulpfile.js

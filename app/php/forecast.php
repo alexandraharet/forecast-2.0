@@ -1,17 +1,19 @@
 <?php
 // api at https://darksky.net/dev/docs
 // max 1000 calls per day
-// object example: https://api.darksky.net/forecast/2cb2a6600011ce4ca629efa9e07cc9bd/55.9533,3.1883
-// object example with EXCLUDE: https://api.darksky.net/forecast/2cb2a6600011ce4ca629efa9e07cc9bd/55.9533,3.1883?exclude=minutely,daily,flags
+// object example: https://api.darksky.net/forecast/api_key/55.9533,3.1883
+// object example with EXCLUDE: https://api.darksky.net/forecast/api_key/55.9533,3.1883?exclude=minutely,daily,flags
+
+include('api-keys.php');
 
 $api_weather = 'https://api.darksky.net/forecast/';
-$api_key2 = '2cb2a6600011ce4ca629efa9e07cc9bd';
+$api_key = $darkskykey;
 // $coordinates = $_GET['coordinates'];
 $lat = $_GET['lat'];
 $lon = $_GET['lon'];
 
 // $units = $_GET['units'];
-$url = $api_weather . $api_key2 . '/' . $lat . ',' . $lon . '?exclude=minutely,flags' ;
+$url = $api_weather . $api_key . '/' . $lat . ',' . $lon . '?exclude=minutely,flags' ;
 // $units=' . $units;
 $curl = curl_init($url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
