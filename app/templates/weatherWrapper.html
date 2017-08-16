@@ -1,7 +1,10 @@
 <div class="col-sm-2" ng-repeat="dataPoint in
-[ weatherResult.hourly.data[1],
-  weatherResult.hourly.data[12],
-  weatherResult.hourly.data[24] ] track by $index">
+[ weatherResult.hourly.data[2],
+  weatherResult.hourly.data[4],
+  weatherResult.hourly.data[6],
+  weatherResult.hourly.data[8],
+  weatherResult.hourly.data[10],
+  weatherResult.hourly.data[12] ] track by $index">
     <wf-weather-report-hourly weather="dataPoint"
                               convert-to-celsius="convertToCelsius(temperature)">
     </wf-weather-report-hourly>
