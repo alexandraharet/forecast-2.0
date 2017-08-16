@@ -115,17 +115,19 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
         }
 
         function convertToDate(time) {
-            if(time)
-            return new Date(time * 1000);
-            else
-            return null;
+            if(time) {
+                return new Date(time * 1000);
+            } else {
+                return null;
+            }
         }
 
         function convertToPercentage(num) {
-            if(num)
-            return Math.round(num * 100);
-            else
-            return null;
+            if(typeof(num) === 'number') {
+                return Math.round(num * 100);
+            } else {
+                return null;
+            }
         }
 
         // function convertToStandard(weatherResult) {
