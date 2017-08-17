@@ -3,23 +3,23 @@
 <head>
 
 	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="Content-Type" content="text/html">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="Alexandra Haret">
 
 	<title>Forecast project</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 
-	<!-- <script src="https://code.angularjs.org/1.6.2/angular.min.js"></script>
-	<script src="https://code.angularjs.org/1.6.2/angular-route.min.js"></script
-	<script src="https://code.angularjs.org/1.6.2/angular-resource.min.js"></script>
-	<script src="https://code.angularjs.org/1.6.2/angular-animate.js"></script> -->
 
 	<script
-  src="http://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+	src="http://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
 
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
@@ -31,11 +31,17 @@
 	<script type="text/javascript" src="directives/directives.js"></script>
 	<script type="text/javascript" src="controllers/main.controller.js"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.5/moment-timezone-with-data.min.js"></script>
+	<!-- <script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+
+
+	<!-- <script src="https://code.angularjs.org/1.6.2/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.6.2/angular-route.min.js"></script
+	<script src="https://code.angularjs.org/1.6.2/angular-resource.min.js"></script>
+	<script src="https://code.angularjs.org/1.6.2/angular-animate.js"></script> -->
 
 </head>
 
@@ -43,25 +49,25 @@
 	<div class="container">
 		<div class="row" ng-controller="mainController as mainCtrl">
 
-			<div class="col-xs-12" >
+			<div class="col">
 				<h4 class='mytitle'>Forecast by City </h4>
-				<form ng-submit="mainCtrl.submit()">
+				<form ng-submit="mainCtrl.submit()" autocomplete="off">
 					<input type="text" ng-model="mainCtrl.address" id="searchBox" class="form-control" />
-					<input type="submit" value="Get forecast" class="btn btn-primary" />
+					<input type="submit" value="Get forecast" class="btn btn-outline-secondary" />
 				</form>
 
 				<div ng-cloak ng-if="mainCtrl.address && mainCtrl.submitted" id='mainPanel'>
 
 					<div ng-switch on="timeframe">
-						<div class="panel panel-default">
+						<div class="">
 
-							<div class="panel-body show-hide">
-								<div class="row col">
-									<h3>{{ mainCtrl.formattedAddress }}</h3>
-								</div>
-								<div class="row col">
-									<a ng-click="timeframe = '24h'">Right now</a> |
-									<a ng-click="timeframe = '7days'">7 days</a>
+							<div class="show-hide">
+								<div class="row">
+									<div class="col">
+										<h3>{{ mainCtrl.formattedAddress }}</h3>
+										<a ng-click="timeframe = '24h'">Right now</a> |
+										<a ng-click="timeframe = '7days'">7 days</a>
+									</div>
 								</div>
 
 								<div ng-switch-default>
@@ -72,22 +78,19 @@
 									</div>
 
 									<div class="row w-currently">
-										<div class="col-md-3 col-sm-4 col-xs-12">
+										<div class="col-xs-12 col-md-3 col-sm-4">
 											<img src="img/{{mainCtrl.renderResult.icon}}.png?<?php echo filemtime('image.jpg') ?>" />
 										</div>
-										<div class="col-md-9 col-sm-8 col-xs-12">
+										<div class="col-xs-12 col-sm-8 col-md-9">
 											<h3>{{ mainCtrl.renderResult.temperature }}&deg;C  <small> / feels like: {{ mainCtrl.renderResult.temperature}}&deg;C</small></h3>
 											<p>Precipitation: {{ mainCtrl.renderResult.precip }}%</p>
 											<p>Wind speed: {{ mainCtrl.renderResult.windSpeed }} km/h</p>
 										</div>
 									</div>
-									<hr />
-									<div class="row align-items-center w-hourly">
-										<wf-weather-wrapper class="col-sm-4"
+										<wf-weather-wrapper class="row no-gutters align-items-center w-hourly"
 											ng-if="mainCtrl.weatherResult"
 							      			weather-result="mainCtrl.weatherResult">
 										</wf-weather-wrapper>
-								</div>
 							</div>
 
 					</div>

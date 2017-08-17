@@ -1,5 +1,76 @@
+body {
+    color: white;
+    min-height: 100vh;
+    background: url('../img/backgrounds/background-8.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top left;
+}
+
+.btn {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.form-control {
+    background-color: rgba(0,0,0,0.1);
+    outline: none;
+    color: white;
+}
+
+.form-control:active, .form-control:focus {
+    color: white;
+    background-color: rgba(0,0,0,0.15);
+    border-color: rgba(0,0,0,.15);
+}
+
+/*body:hover {
+    background-size: auto 110%;
+    transition: all 30s;
+}*/
+
 .container {
-    background-color: lightgray;
+    /*background-color: lightgray;*/
     width: 100%;
     max-width: 600px;
+}
+
+wf-weather-report-hourly img,
+.w-currently .col-xs-12 img {
+    max-width: 90%;
+    padding: 5%;
+    transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    transition: transform ease-in-out .25s;
+}
+
+wf-weather-report-hourly {
+    padding: 1em;
+}
+
+wf-weather-report-hourly p {
+    margin: 0;
+}
+
+wf-weather-report-hourly:hover img,
+.w-currently .col-xs-12:hover img {
+    transform: scale(1);
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transition: transform ease-in-out .25s;
+}
+
+wf-weather-report-hourly:nth-of-type(2n+1) {
+    background-color: rgba(0, 0, 0, 0.60);
+}
+
+wf-weather-report-hourly:nth-of-type(2n) {
+    background-color: rgba(0, 0, 0, 0.50);
+}
+
+@media screen and (max-width: 575px) {
+    body {
+        font-size: 0.72em;
+    }
 }

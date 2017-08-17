@@ -1,12 +1,10 @@
-<div ng-repeat="dataPoint in
-[ weatherResult.hourly.data[2],
-  weatherResult.hourly.data[4],
-  weatherResult.hourly.data[6],
-  weatherResult.hourly.data[8],
-  weatherResult.hourly.data[10],
-  weatherResult.hourly.data[12] ] track by $index">
-    <wf-weather-report-hourly weather="dataPoint"
+<wf-weather-report-hourly class="col text-center" ng-repeat="dataPoint in
+    [ weatherResult.hourly.data[2],
+      weatherResult.hourly.data[4],
+      weatherResult.hourly.data[6],
+      weatherResult.hourly.data[8]
+    ] track by $index"
+     weather="dataPoint"
                               address="addressService.address"
                               convert-to-celsius="convertToCelsius(temperature)">
-    </wf-weather-report-hourly>
-</div>
+</wf-weather-report-hourly>
