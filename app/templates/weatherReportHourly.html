@@ -1,4 +1,4 @@
-    <p>{{hourly.renderResult.localtime | date : 'HH'}}:00</p>
+<p>{{hourly.renderResult.localtime | date : 'HH:mm' : timezoneOffset }}</p>
     <!-- <h4>{{hourly.renderResult.summary}}</h4> -->
     <img src="img/{{hourly.renderResult.icon}}.png?"/>
     <p>{{hourly.renderResult.temperature}}°

@@ -1,31 +1,17 @@
 // services
 
-/*
-
-weather API object example: https://api.darksky.net/forecast/2cb2a6600011ce4ca629efa9e07cc9bd/44.439663,26.096306?exclude=minutely,flags
-location API example: https://maps.googleapis.com/maps/api/geocode/json?address=Bucharest&key=AIzaSyBvzrK2_Fr84Od185gbDGxlpRapNcJE4BY
-
-*/
-
 (function(){
     "use strict";
     angular
     .module('weatherApp')
     .factory('addressService', service);
-
     function service($http, $q) {
         var exports = {
             callLocationApi: callLocationApi,
             getCoordinates: getCoordinates,
-            getFormattedAddress: getFormattedAddress
+            getFormattedAddress: getFormattedAddress,
         };
-
         var formattedAddress, coordinates, addressApiResponse;
-
-        // function getAddressFromApi(address) {
-        //     addressApiResponse = $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=api_key');
-        //     return addressApiResponse;
-        // }
 
         function getAddressFromApi(address) {
             addressApiResponse = $http({
@@ -38,7 +24,6 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
             });
             return addressApiResponse;
         }
-
 
         function callLocationApi(address) {
             var deferred = $q.defer();
@@ -69,17 +54,43 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
     "use strict";
     angular
     .module('weatherApp')
-    .factory('weatherService', service);
-
+    .factory('timezoneService', service);
     function service($http, $q) {
+        var exports = {
+            callTimezoneApi: callTimezoneApi
+        };
+        var timezoneApiResponse= '';
 
+        function getTimezoneFromApi(lat, lon) {
+            var timeStamp = Math.floor(Date.now() / 1000)
+            timezoneApiResponse = $http.get('https://maps.googleapis.com/maps/api/timezone/json?location=' + lat + ',' + lon + '&timestamp=' + timeStamp + '&key=AIzaSyAsOiLqL4k2xnWSbGmFzmdwaWMhAmyZ5Ss');
+            return timezoneApiResponse;
+        }
+
+        function callTimezoneApi(lat, lon) {
+            var deferred = $q.defer();
+            if(getTimezoneFromApi(lat, lon)) {
+                deferred.resolve(timezoneApiResponse);
+            }
+            else deferred.reject('Error returing the timezoneApi response');
+            return deferred.promise;
+        }
+        return exports;
+    }
+})();
+
+(function(){
+    "use strict";
+    angular
+    .module('weatherApp')
+    .factory('weatherService', service);
+    function service($http, $q) {
         var exports = {
             callWeatherApi: callWeatherApi,
             convertToCelsius: convertToCelsius,
             convertToDate: convertToDate,
             convertToPercentage: convertToPercentage
         };
-
         var weatherApiResponse;
 
         function getWeatherFromApi(lat, lon) {
@@ -103,7 +114,6 @@ location API example: https://maps.googleapis.com/maps/api/geocode/json?address=
             else deferred.reject('Error returing the weaherApi response');
             return deferred.promise;
         }
-
 
         function convertToCelsius(Fah) {
             if(Fah) {
