@@ -31,8 +31,6 @@
 				windSpeed: weatherResult.currently.windSpeed,
 				localTime: getLocalTime
 			};
-
-			console.log(vm.renderResult);
 		}
 
 		function convertTimezoneOffset(rawOffset) {
