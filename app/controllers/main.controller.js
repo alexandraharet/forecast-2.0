@@ -114,8 +114,11 @@
 		vm.renderResult = {};
 		vm.formattedAddress = undefined;
 
+		vm.loading = false;
+
 		vm.submit = function() {
 			vm.submitted = true;
+			vm.loading = true;
 			addressService.callLocationApi(vm.address)
 			.then(
 				function(addressResponse){
@@ -143,8 +146,10 @@
 								// buildRenderResultObject(vm.weatherResult); // TODO
 								buildRenderResultObject(vm.weatherResult);
 								convertToStandard(vm.weatherResult);
+								vm.loading = false;
 							});
-						});
+						})
+
 					};
 				}
 			})();

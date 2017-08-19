@@ -1,7 +1,7 @@
-<div ng-if="mainCtrl.address && mainCtrl.submitted" id='mainPanel'>
+<div ng-if="!mainCtrl.loading && mainCtrl.submitted" id='mainPanel'>
     <div ng-switch on="timeframe">
         <div class="show-hide">
-            <div class="row ng-cloak">
+            <div class="row">
                 <div class="col">
                     <h3>{{ mainCtrl.formattedAddress }}</h3>
                     <wf-local-time timezone-offset="mainCtrl.timezoneOffset">
@@ -11,12 +11,12 @@
                 </div>
             </div>
             <div ng-switch-default>
-                <div class="row w-header" ng-cloak>
+                <div class="row w-header">
                     <div class="col">
                         <h4>Right now: {{ mainCtrl.renderResult.summary }} </h4>
                     </div>
                 </div>
-                <div class="row w-currently" ng-cloak>
+                <div class="row w-currently">
                     <div class="col-xs-12 col-md-3 col-sm-4">
                         <img src="img/{{mainCtrl.renderResult.icon}}.png?<?php echo filemtime('image.jpg') ?>" />
                     </div>
@@ -26,11 +26,11 @@
                         <p>Wind speed: {{ mainCtrl.renderResult.windSpeed }} km/h</p>
                     </div>
                 </div>
-                <!-- <wf-weather-wrapper class="row no-gutters align-items-center w-hourly"
+                <wf-weather-wrapper class="row no-gutters align-items-center w-hourly"
                                     ng-if="mainCtrl.weatherResult"
                                     timezone-offset="mainCtrl.timezoneOffset"
                                     weather-result="mainCtrl.weatherResult"
-                                    ng-cloak></wf-weather-wrapper> -->
+                                    ></wf-weather-wrapper>
             </div>
         </div>
     </div>
