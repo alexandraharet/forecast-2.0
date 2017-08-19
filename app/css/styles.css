@@ -1,7 +1,3 @@
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
-}
-
 body {
     color: white;
     min-height: 100vh;
@@ -14,6 +10,35 @@ body {
 .btn {
     margin-top: 1em;
     margin-bottom: 1em;
+.loader {
+    display: block;
+    position: relative;
+    left: calc(50% - 50px);
+    border: 5px solid rgba(225, 255, 255, 0.2);
+    border-top: 5px solid rgba(225, 255, 255, 0.6);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader.ng-animate {
+    transition:0s none;
+    -webkit-transition:0s none;
+    animation: 0s none;
+    -webkit-animation: 0s none;
+}
+weather-result.ng-animate {
+    transition: visibility fade-in-out 10s;
+    /*-webkit-transition:10s none;*/
+    /*animation: 2s;
+    -webkit-animation: 2s none;*/
+}
 }
 
 .btn-outline-secondary {
@@ -34,8 +59,8 @@ body {
 }
 
 /*body:hover {
-    background-size: auto 110%;
-    transition: all 30s;
+background-size: auto 110%;
+transition: all 30s;
 }*/
 
 .container {
