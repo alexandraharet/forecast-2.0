@@ -1,6 +1,6 @@
 <p>{{hourly.renderResult.localtime | date : 'HH:mm' : timezoneOffset }}</p>
     <!-- <h4>{{hourly.renderResult.summary}}</h4> -->
-    <img src="img/{{hourly.renderResult.icon}}.png?"/>
+    <img ng-src="img/{{hourly.renderResult.icon}}.png?"/>
     <p>{{hourly.renderResult.temperature}}°
         <!-- / <small>Feels Like: {{hourly.renderResult.feelsLike}}°C</small> -->
     </p>

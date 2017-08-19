@@ -18,7 +18,7 @@
                 </div>
                 <div class="row w-currently">
                     <div class="col-xs-12 col-md-3 col-sm-4">
-                        <img src="img/{{mainCtrl.renderResult.icon}}.png?<?php echo filemtime('image.jpg') ?>" />
+                        <img ng-src="img/{{mainCtrl.renderResult.icon}}.png?" />
                     </div>
                     <div class="col-xs-12 col-sm-8 col-md-9">
                         <h3>{{ mainCtrl.renderResult.temperature }}&deg;C  <small> / feels like: {{ mainCtrl.renderResult.temperature}}&deg;C</small></h3>
