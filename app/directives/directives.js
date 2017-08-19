@@ -1,6 +1,38 @@
 // directives
+(function() {
 
-angular
+    angular
+    .module('weatherApp')
+    .directive("wfWeatherResult", ['$interpolate',
+    function($interpolate) {
+        return {
+            restrict: "E",
+            templateUrl: "templates/weatherResult.html"
+        };
+    }]);
+
+
+    // angular
+    // .module('weatherApp')
+    // .directive("wfLocalTime", ['$interpolate',
+    // function($interpolate) {
+    //     return {
+    //         restrict: "E",
+    //         templateUrl: "templates/localTime.html",
+    //         scope: {
+    //             timezoneOffset: '='
+    //         },
+    //         link: function (scope, elm, attrs) {
+    //             var timezoneOffset = $interpolate(scope.timezoneOffset);
+    //             scope.timezoneOffset = timezoneOffset(scope);
+    //         },
+    //         controller: function($scope) {
+    //
+    //             var vm = this;
+    //             vm.timezoneOffset =  $scope.timezoneOffset;
+    //         }
+    //     };
+    // }]);
 
 
     angular
@@ -73,8 +105,6 @@ angular
                     updatedWeatherData();
                     updateRenderedResult();
                     convertToStandard(weatherData);
-
-                    // console.log(vm.renderResult);
                 });
 
             },
@@ -90,3 +120,5 @@ angular
             templateUrl: "templates/weatherReportDaily.html",
         };
     });
+
+})();
