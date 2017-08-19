@@ -1,0 +1,37 @@
+<div ng-if="mainCtrl.address && mainCtrl.submitted" id='mainPanel'>
+    <div ng-switch on="timeframe">
+        <div class="show-hide">
+            <div class="row ng-cloak">
+                <div class="col">
+                    <h3>{{ mainCtrl.formattedAddress }}</h3>
+                    <wf-local-time timezone-offset="mainCtrl.timezoneOffset">
+                    </wf-local-time>
+                    <a ng-click="timeframe = '24h'">Right now</a> |
+                    <a ng-click="timeframe = '7days'">7 days</a>
+                </div>
+            </div>
+            <div ng-switch-default>
+                <div class="row w-header" ng-cloak>
+                    <div class="col">
+                        <h4>Right now: {{ mainCtrl.renderResult.summary }} </h4>
+                    </div>
+                </div>
+                <div class="row w-currently" ng-cloak>
+                    <div class="col-xs-12 col-md-3 col-sm-4">
+                        <img src="img/{{mainCtrl.renderResult.icon}}.png?<?php echo filemtime('image.jpg') ?>" />
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9">
+                        <h3>{{ mainCtrl.renderResult.temperature }}&deg;C  <small> / feels like: {{ mainCtrl.renderResult.temperature}}&deg;C</small></h3>
+                        <p>Precipitation: {{ mainCtrl.renderResult.precip }}%</p>
+                        <p>Wind speed: {{ mainCtrl.renderResult.windSpeed }} km/h</p>
+                    </div>
+                </div>
+                <!-- <wf-weather-wrapper class="row no-gutters align-items-center w-hourly"
+                                    ng-if="mainCtrl.weatherResult"
+                                    timezone-offset="mainCtrl.timezoneOffset"
+                                    weather-result="mainCtrl.weatherResult"
+                                    ng-cloak></wf-weather-wrapper> -->
+            </div>
+        </div>
+    </div>
+</div>
