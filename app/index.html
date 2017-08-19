@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en-US" ng-app="weatherApp">
 <head>
-
 	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="Content-Type" content="text/html">
 	<meta name="author" content="Alexandra Haret">
 
 	<title>Forecast project</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
-
 
 	<script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -26,32 +24,21 @@
 	<script type="text/javascript" src="services/services.js"></script>
 	<script type="text/javascript" src="directives/directives.js"></script>
 	<script type="text/javascript" src="controllers/main.controller.js"></script>
-
-
-	<!-- <script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script> -->
-
-
-
-
 </head>
 
 <body>
 	<div class="container">
 		<div class="row" ng-controller="mainController as mainCtrl">
-
 			<div class="col">
 				<h4 class='mytitle'>Forecast by City </h4>
-				<form ng-submit="mainCtrl.submit()" autocomplete="off">
-					<input type="text" ng-model="mainCtrl.address" id="searchBox" class="form-control" />
-					<input type="submit" value="Get forecast" class="btn btn-outline-secondary" />
+				<form ng-submit="mainCtrl.submit()" autocomplete="off" class="form-inline">
+					<input type="text" ng-model="mainCtrl.address" class="form-control col-12 col-sm-8" />
+					<input type="submit" value="Get forecast" id="search-button" class="btn btn-outline-secondar col-12 col-sm-4" />
 				</form>
-				<wf-weather-result></wf-weather-result>
+				<wf-weather-result>
+				</wf-weather-result>
+			</div>
+		</div>
 	</div>
-</div>
-
-
-</div>
-
 </body>
 </html>
