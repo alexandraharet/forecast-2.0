@@ -1,0 +1,11 @@
+<wf-weather-report-daily class="col text-center" ng-repeat="dataPoint in
+    [ weatherResult.daily.data[1],
+      weatherResult.daily.data[2],
+      weatherResult.daily.data[3],
+      weatherResult.daily.data[4]
+    ] track by $index"
+     weather="dataPoint"
+                              address="addressService.address"
+                              convert-to-celsius="convertToCelsius(temperature)"
+                              timezone-offset="timezoneOffset">
+</wf-weather-report-daily>

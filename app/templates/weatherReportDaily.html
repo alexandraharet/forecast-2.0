@@ -1,6 +1,8 @@
-<div>
-    <p>{{ convertToDate( { date: weatherResult.time } ) | date: dateFormat }}</p>
-    <img src="img/{{weatherResult.icon}}.png" style="max-width: 50px; height: auto;"/>
-    <p>{{ weatherResult.summary }}</p>
-    <p>{{ convertToStandard( { temperature: weatherResult.temperatureMin } ) }}&deg;C / <span class="text-muted">{{ convertToStandard( { temperature: weatherResult.temperatureMax } )}}&deg;C</span></p>
-</div>
+<p>{{daily.renderResult.localtime | date : 'd MMM' : timezoneOffset }}</p>
+<!-- <h4>{{hourly.renderResult.summary}}</h4> -->
+<img ng-src="img/{{daily.renderResult.icon}}.png?"/>
+<p>{{daily.renderResult.temperatureMax}}°
+    <small> / {{daily.renderResult.temperatureMin}}°</small>
+    <!-- / <small>Feels Like: {{hourly.renderResult.feelsLike}}°C</small> -->
+</p>
+<!-- <p>Precip.: {{hourly.renderResult.precipitation}}%</p> -->

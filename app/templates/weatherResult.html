@@ -1,35 +1,61 @@
 <div ng-if="mainCtrl.submitted" id='mainPanel'>
     <div class="loader" ng-if="mainCtrl.loading"></div>
-    <div ng-switch on="timeframe" ng-show="!mainCtrl.loading">
+    <div ng-show="!mainCtrl.loading" ng-controller="switchViewController as switchViewCtrl">
         <div class="row">
             <div class="col">
+
+            <div class="btn-group toggle">
+                <label class="btn btn-secondary btn-sm active">
+                    <input type="radio" ng-model="value" value="hourly" ng-change='newValue(value)'
+                           name="options" id="option1" autocomplete="off" ng-checked="{{value == newValue(value)}}" />
+                    Hourly
+                </label>
+                <label class="btn btn-secondary btn-sm">
+                    <input type="radio" ng-model="value" value="daily" ng-change='newValue(value)'
+                           name="options" id="option2" autocomplete="off" ng-checked="{{value == newValue(value)}}"/>
+                    Daily
+                </label>
+            </div>
+
                 <h3 class="text-center text-sm-left">{{ mainCtrl.formattedAddress }}</h3>
                 <!-- <wf-local-time timezone-offset="mainCtrl.timezoneOffset">
             </wf-local-time> -->
             <!-- <a ng-click="timeframe = '24h'">Right now</a> |
             <a ng-click="timeframe = '7days'">7 days</a> -->
-            </div>
-        </div>
-        <div ng-switch-default>
-            <div class="row w-header text-center text-sm-left">
-                <div class="col">
-                    <h4>Right now: {{ mainCtrl.renderResult.summary }} </h4>
-                </div>
-            </div>
-            <div class="row w-currently text-center">
-                <div class="col-xs-12 col-md-3 col-sm-4">
-                    <img ng-src="img/{{mainCtrl.renderResult.icon}}.png?" />
-                </div>
-                <div class="col-xs-12 col-sm-8 col-md-9 text-sm-left">
-                    <h3>{{ mainCtrl.renderResult.temperature }}&deg;C  <small> / feels like: {{ mainCtrl.renderResult.temperature}}&deg;C</small></h3>
-                    <p>Precipitation: {{ mainCtrl.renderResult.precip }}%</p>
-                    <p>Wind speed: {{ mainCtrl.renderResult.windSpeed }} km/h</p>
-                </div>
-            </div>
-            <wf-weather-wrapper class="row no-gutters align-items-center w-hourly"
-            ng-if="mainCtrl.weatherResult"
-            timezone-offset="mainCtrl.timezoneOffset"
-            weather-result="mainCtrl.weatherResult"></wf-weather-wrapper>
         </div>
     </div>
+
+    <div class="row w-header text-center text-sm-left">
+        <div class="col">
+            <h4>Right now: {{ mainCtrl.renderResult.summary }} </h4>
+        </div>
+    </div>
+    <div class="row w-currently text-center">
+        <div class="col-xs-12 col-md-3 col-sm-4">
+            <img ng-src="img/{{mainCtrl.renderResult.icon}}.png?" />
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9 text-sm-left">
+            <h3>{{ mainCtrl.renderResult.temperature }}&deg;C  <small> / feels like: {{ mainCtrl.renderResult.temperature}}&deg;C</small></h3>
+            <p>Precipitation: {{ mainCtrl.renderResult.precip }}%</p>
+            <p>Wind speed: {{ mainCtrl.renderResult.windSpeed }} km/h</p>
+        </div>
+    </div>
+
+    <div ng-switch="value">
+        <div ng-switch-when="hourly">
+            <wf-weather-wrapper-hourly class="row no-gutters align-items-center w-hourly"
+                                ng-if="mainCtrl.weatherResult"
+                                timezone-offset="mainCtrl.timezoneOffset"
+                                weather-result="mainCtrl.weatherResult"></wf-weather-wrapper-hourly>
+        </div>
+
+        <div ng-switch-when="daily">
+            <wf-weather-wrapper-daily class="row no-gutters align-items-center w-hourly"
+                                ng-if="mainCtrl.weatherResult"
+                                timezone-offset="mainCtrl.timezoneOffset"
+                                weather-result="mainCtrl.weatherResult"></wf-weather-wrapper-daily>
+        </div>
+    </div>
+
+</div>
 </div>

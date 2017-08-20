@@ -2,10 +2,10 @@
     "use strict";
     angular
     .module('weatherApp')
-    .directive("wfWeatherWrapper", function() {
+    .directive("wfWeatherWrapperHourly", function() {
         return {
             restrict: "E",
-            templateUrl: "templates/weatherWrapper.html",
+            templateUrl: "templates/weatherWrapperHourly.html",
             scope: {
                 weatherResult: "=",
                 convertToCelsius: "&",
