@@ -1,11 +1,10 @@
-<div ng-if="mainCtrl.submitted" id='mainPanel'>
+<div ng-if="mainCtrl.submitted " id='mainPanel'>
     <div class="loader" ng-if="mainCtrl.loading"></div>
-    <div ng-show="!mainCtrl.loading" ng-controller="switchViewController as switchViewCtrl">
+    <div ng-show="!mainCtrl.loading" ng-controller="switchViewController as switchViewCtrl" class="fade-in">
 
         <div class="row w-header text-center text-sm-left">
             <div class="col">
                 <h3 class="text-center text-sm-left">{{ mainCtrl.formattedAddress }}</h3>
-                <h4>Right now: {{ mainCtrl.renderResult.summary }} </h4>
             </div>
         </div>
         <div class="row w-currently text-center">
@@ -13,7 +12,7 @@
                 <img ng-src="img/{{mainCtrl.renderResult.icon}}.png?" />
             </div>
             <div class="col-xs-12 col-sm-8 col-md-9 text-sm-left">
-                <h3>{{ mainCtrl.renderResult.temperature }}&deg;C  <small> / feels like: {{ mainCtrl.renderResult.temperature}}&deg;C</small></h3>
+                <h4>{{ mainCtrl.renderResult.summary }} {{ mainCtrl.renderResult.temperature }}&deg;  <small> / feels like {{ mainCtrl.renderResult.temperature}}&deg;</small></h4>
                 <p>Precipitation: {{ mainCtrl.renderResult.precip }}%</p>
                 <p>Wind speed: {{ mainCtrl.renderResult.windSpeed }} km/h</p>
             </div>
@@ -40,15 +39,15 @@
         </div>
     </div>
 
-    <div ng-switch="selectedView" ng-cloak>
-        <div ng-switch-when="hourly">
+    <div ng-switch="selectedView">
+        <div ng-switch-when="hourly" class="fade-in">
             <wf-weather-wrapper-hourly class="row no-gutters align-items-center w-hourly"
                                 ng-if="mainCtrl.weatherResult"
                                 timezone-offset="mainCtrl.timezoneOffset"
                                 weather-result="mainCtrl.weatherResult"></wf-weather-wrapper-hourly>
         </div>
 
-        <div ng-switch-when="daily">
+        <div ng-switch-when="daily" class="fade-in">
             <wf-weather-wrapper-daily class="row no-gutters align-items-center w-hourly"
                                 ng-if="mainCtrl.weatherResult"
                                 timezone-offset="mainCtrl.timezoneOffset"

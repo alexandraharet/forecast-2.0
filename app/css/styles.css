@@ -11,6 +11,22 @@ p {
     margin-bottom: 0;
 }
 
+
+.fade-in.ng-enter,
+.fade.ng-hide {
+  transition:0.3s linear all;
+  opacity:0;
+}
+
+.fade-in.ng-enter.ng-enter-active,
+.fade-in.ng-show {
+  opacity:1;
+}
+
+small {
+  font-size: 70%;
+}
+
 .title {
     margin: 2em auto 1em;
 }
