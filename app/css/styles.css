@@ -7,9 +7,14 @@ body {
     background-position: top left;
 }
 
-.btn {
-    margin-top: 1em;
-    margin-bottom: 1em;
+p {
+    margin-bottom: 0;
+}
+
+.title {
+    margin: 2em auto;
+}
+
 .loader {
     display: block;
     position: relative;
@@ -33,12 +38,35 @@ body {
     animation: 0s none;
     -webkit-animation: 0s none;
 }
+
+#mainPanel {
+    margin-top: 2em;
+    position: relative;
+    width: 100%;
+}
+
 weather-result.ng-animate {
     transition: visibility fade-in-out 10s;
     /*-webkit-transition:10s none;*/
     /*animation: 2s;
     -webkit-animation: 2s none;*/
 }
+
+
+@media (min-width: 576px) {
+    form {
+        padding-right:1em;
+    }
+    #search-button {
+        margin-right: -1em;
+        margin-left: 1em;
+    }
+}
+
+@media (max-width: 577px) {
+    #search-button {
+        margin-top: 1em;
+    }
 }
 
 .btn-outline-secondary {
@@ -58,13 +86,7 @@ weather-result.ng-animate {
     border-color: rgba(0,0,0,.15);
 }
 
-/*body:hover {
-background-size: auto 110%;
-transition: all 30s;
-}*/
-
 .container {
-    /*background-color: lightgray;*/
     width: 100%;
     max-width: 600px;
 }
