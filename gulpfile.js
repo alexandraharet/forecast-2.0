@@ -6,7 +6,6 @@ var minifyCss = require('gulp-clean-css');
 var clean = require('gulp-clean');
 var replace = require('gulp-replace');
 var browserSync = require('browser-sync').create();
-var deleteLines = require('gulp-delete-lines');
 var insertLines = require('gulp-insert-lines');
 
 paths = {
@@ -31,22 +30,6 @@ gulp.task('clean', function() {
 
 gulp.task('replace-script-tags', function() {
   return gulp.src(paths.dist + 'index.html')
-  .pipe(deleteLines({
-    'filters': [
-    /<script\s+type=["']text\/javascript["']\s+src=/i,
-    ]
-    }))
-  .pipe(deleteLines({
-    'filters': [
-    /<script\s+src=["']bower_components["']\s+src=/i
-    ]
-    }))
-  .pipe(deleteLines({
-    'filters': [
-    /<script\s+src=["']\s+src=/i
-    ]
-  }))
-  .pipe(replace('bower_components', '../app/bower_components'))
   .pipe(insertLines({
     'before': /<\/head>$/,
     'lineBefore': '<link rel="stylesheet" type="text/css" href="styles.min.css" />'
@@ -56,7 +39,6 @@ gulp.task('replace-script-tags', function() {
     'lineBefore': '<script src="scripts.min.js"></script>',
   }))
   .pipe(gulp.dest(paths.dist));
-
 });
 
 gulp.task('build-js', function() {
