@@ -53,7 +53,7 @@ gulp.task('add-scripts-and-styles', function() {
 
 //BUILD AND COPY TASKS
 gulp.task('build-js', function() {
-  return gulp.src([paths.src + 'js/app.js', paths.src + 'services/*.js', paths.src + 'controllers/*.js', paths.src + 'directives/*.js'])
+  return gulp.src([paths.src + 'js/app.js', paths.src + 'directives/*.js', paths.src + 'controllers/*.js', paths.src + 'services/*.js'])
   .pipe(concat('scripts.min.js'))
   .pipe(minifyJs())
   .pipe(gulp.dest(paths.dest));
@@ -113,7 +113,7 @@ gulp.task('watch', function() {
     browserSync.reload();
     done();
   }));
-  gulp.watch(paths.src + '*.js', gulp.series('build-js',
+  gulp.watch(paths.src + '**/*.js', gulp.series('build-js',
   function(done) {
     browserSync.reload();
     done();
