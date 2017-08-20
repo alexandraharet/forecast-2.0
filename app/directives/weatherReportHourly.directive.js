@@ -1,54 +1,5 @@
-// directives
 (function() {
-
-    angular
-    .module('weatherApp')
-    .directive("wfWeatherResult", ['$interpolate',
-    function($interpolate) {
-        return {
-            restrict: "E",
-            templateUrl: "templates/weatherResult.html"
-        };
-    }]);
-
-
-    // angular
-    // .module('weatherApp')
-    // .directive("wfLocalTime", ['$interpolate',
-    // function($interpolate) {
-    //     return {
-    //         restrict: "E",
-    //         templateUrl: "templates/localTime.html",
-    //         scope: {
-    //             timezoneOffset: '='
-    //         },
-    //         link: function (scope, elm, attrs) {
-    //             var timezoneOffset = $interpolate(scope.timezoneOffset);
-    //             scope.timezoneOffset = timezoneOffset(scope);
-    //         },
-    //         controller: function($scope) {
-    //
-    //             var vm = this;
-    //             vm.timezoneOffset =  $scope.timezoneOffset;
-    //         }
-    //     };
-    // }]);
-
-
-    angular
-    .module('weatherApp')
-    .directive("wfWeatherWrapper", function() {
-        return {
-            restrict: "E",
-            templateUrl: "templates/weatherWrapper.html",
-            scope: {
-                weatherResult: "=",
-                convertToCelsius: "&",
-                timezoneOffset: '='
-            }
-        };
-    });
-
+    "use strict";
     angular
     .module('weatherApp')
     .directive("wfWeatherReportHourly", ['weatherService', '$filter', '$interpolate', function(weatherService, $filter, $interpolate) {
@@ -111,14 +62,4 @@
             controllerAs: 'hourly'
         };
     }]);
-
-    angular
-    .module('weatherApp')
-    .directive("wfWeatherReportDaily", function() {
-        return {
-            restrict: "E",
-            templateUrl: "templates/weatherReportDaily.html",
-        };
-    });
-
 })();

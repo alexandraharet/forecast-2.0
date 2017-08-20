@@ -1,95 +1,9 @@
-// services
-(function(){
-    "use strict";
-    angular
-    .module('weatherApp')
-    .factory('addressService', service);
-
-    service.$inject = ["$http", "$q"];
-
-    function service($http, $q) {
-        var exports = {
-            callLocationApi: callLocationApi,
-            getCoordinates: getCoordinates,
-            getFormattedAddress: getFormattedAddress,
-        };
-        var formattedAddress, coordinates, addressApiResponse;
-
-        function getAddressFromApi(address) {
-            addressApiResponse = $http({
-                url: 'php/coordinates.php',
-                method: 'get',
-                params: {
-                    address: address
-                },
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            });
-            return addressApiResponse;
-        }
-
-        function callLocationApi(address) {
-            var deferred = $q.defer();
-            if(getAddressFromApi(address)) {
-                deferred.resolve(addressApiResponse);
-            }
-            else deferred.reject('Error returing the addressAPI response');
-            return deferred.promise;
-        }
-
-        function getFormattedAddress(addressApiResponse) {
-            formattedAddress = addressApiResponse.data.results[0].formatted_address;
-            return formattedAddress;
-        }
-
-        function getCoordinates(addressApiResponse) {
-            coordinates = {
-                lat: addressApiResponse.data.results[0].geometry.location.lat,
-                lon: addressApiResponse.data.results[0].geometry.location.lng
-            };
-            return coordinates;
-        }
-        return exports;
-    }
-})();
-
-(function(){
-    "use strict";
-    angular
-    .module('weatherApp')
-    .factory('timezoneService', service);
-
-    service.$inject = ["$http", "$q"];
-
-    function service($http, $q) {
-        var exports = {
-            callTimezoneApi: callTimezoneApi
-        };
-        var timezoneApiResponse= '';
-
-        function getTimezoneFromApi(lat, lon) {
-            var timeStamp = Math.floor(Date.now() / 1000)
-            timezoneApiResponse = $http.get('https://maps.googleapis.com/maps/api/timezone/json?location=' + lat + ',' + lon + '&timestamp=' + timeStamp + '&key=AIzaSyAsOiLqL4k2xnWSbGmFzmdwaWMhAmyZ5Ss');
-            return timezoneApiResponse;
-        }
-
-        function callTimezoneApi(lat, lon) {
-            var deferred = $q.defer();
-            if(getTimezoneFromApi(lat, lon)) {
-                deferred.resolve(timezoneApiResponse);
-            }
-            else deferred.reject('Error returing the timezoneApi response');
-            return deferred.promise;
-        }
-        return exports;
-    }
-})();
-
 (function(){
     "use strict";
     angular
     .module('weatherApp')
     .factory('weatherService', service);
-    
+
     service.$inject = ["$http", "$q"];
 
     function service($http, $q) {
