@@ -7,6 +7,16 @@
     controller.$inject = ["$scope"];
 
 	function controller($scope) {
-		$scope.value = 'hourly';
+		$scope.selectedView = 'hourly';
+		$scope.showHourly = function(selectedView) {
+			if (selectedView === 'hourly') {
+				return 'active';
+			};
+		}
+		$scope.showDaily = function(selectedView) {
+			if (selectedView === 'daily') {
+				return 'active';
+			};
+		}
     }
 })();

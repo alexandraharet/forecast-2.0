@@ -12,7 +12,7 @@ p {
 }
 
 .title {
-    margin: 2em auto;
+    margin: 2em auto 1em;
 }
 
 .instructions {
@@ -24,8 +24,28 @@ p {
   position: absolute;
     clip: rect(0,0,0,0);
     pointer-events: none;
-
 }
+
+.toggle.btn-secondary:not(.active):hover {
+    color: #fff;
+    background-color: #868e96;
+    border-color: transparent;
+    z-index: 1;
+}
+
+.toggle.btn-secondary:not(.active) {
+    border-color: #868e96;
+}
+
+.btn-group>.btn.toggle:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-bottom-left-radius: 0;
+}
+
+.btn-group>.btn.toggle:last-child:not(:first-child), .btn-group>.dropdown-toggle:not(:first-child) {
+  border-bottom-right-radius: 0;
+}
+
+
 
 .loader {
     display: block;
