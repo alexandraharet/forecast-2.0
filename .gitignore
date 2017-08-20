@@ -1,7 +1,8 @@
 /**/api-keys.php
 *.txt
 *.zip
-bootstrap-3.3.6-dist/
 dist/
 local/
+app/bower_components
+app/bower.json
 node_modules/
