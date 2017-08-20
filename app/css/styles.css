@@ -15,6 +15,12 @@ p {
     margin: 2em auto;
 }
 
+.instructions {
+  margin-bottom: 1em;
+  color: rgba(225, 225, 225, 0.9);
+}
+
+
 .loader {
     display: block;
     position: relative;
@@ -35,22 +41,19 @@ p {
 
 .loader.ng-animate {
     transition:0s none;
-    -webkit-transition:0s none;
     animation: 0s none;
-    -webkit-animation: 0s none;
+
 }
 
 #mainPanel {
     margin-top: 2em;
+    margin-bottom: 2em;
     position: relative;
     width: 100%;
 }
 
 weather-result.ng-animate {
     transition: visibility fade-in-out 10s;
-    /*-webkit-transition:10s none;*/
-    /*animation: 2s;
-    -webkit-animation: 2s none;*/
 }
 
 
@@ -97,8 +100,6 @@ wf-weather-report-hourly img,
     max-width: 90%;
     padding: 5%;
     transform: scale(0.9);
-    -ms-transform: scale(0.9);
-    -webkit-transform: scale(0.9);
     transition: transform ease-in-out .25s;
 }
 
@@ -113,8 +114,6 @@ wf-weather-report-hourly p {
 wf-weather-report-hourly:hover img,
 .w-currently .col-xs-12:hover img {
     transform: scale(1);
-    -ms-transform: scale(1);
-    -webkit-transform: scale(1);
     transition: transform ease-in-out .25s;
 }
 
