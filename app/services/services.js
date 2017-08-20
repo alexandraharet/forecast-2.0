@@ -1,10 +1,12 @@
 // services
-
 (function(){
     "use strict";
     angular
     .module('weatherApp')
     .factory('addressService', service);
+
+    service.$inject = ["$http", "$q"];
+
     function service($http, $q) {
         var exports = {
             callLocationApi: callLocationApi,
@@ -55,6 +57,9 @@
     angular
     .module('weatherApp')
     .factory('timezoneService', service);
+
+    service.$inject = ["$http", "$q"];
+
     function service($http, $q) {
         var exports = {
             callTimezoneApi: callTimezoneApi
@@ -84,6 +89,9 @@
     angular
     .module('weatherApp')
     .factory('weatherService', service);
+    
+    service.$inject = ["$http", "$q"];
+
     function service($http, $q) {
         var exports = {
             callWeatherApi: callWeatherApi,

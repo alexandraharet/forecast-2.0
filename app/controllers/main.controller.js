@@ -1,8 +1,12 @@
+//controllers
 (function() {
 	'use strict';
 	angular
 	.module('weatherApp')
 	.controller('mainController', controller);
+
+    controller.$inject = ["$rootScope", "$scope", "addressService", "weatherService", "timezoneService"];
+
 
 	function controller($rootScope, $scope, addressService, weatherService, timezoneService) {
 
