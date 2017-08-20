@@ -14,38 +14,14 @@ paths = {
   dist: "dist/"
 };
 
-gulp.task('watch', function() {
-  gulp.watch(paths.src + 'css/*.css', function(done) {
-    browserSync.reload();
-    done();
-  });
-  gulp.watch(paths.src + '*.html', function(done) {
-    browserSync.reload();
-    done();
-  });
-  gulp.watch(paths.src + '**/*.js', function(done) {
-    browserSync.reload();
-    done();
-  });
-});
-
 // BROWSER-SYNC
 function browserSyncInit(done) {
   browserSync.init({
-    server: {
-      baseDir: paths.src
-    }
+    proxy: "localhost/forecast-2-0/dist/"
   });
   done();
 }
 gulp.task('browserSync', browserSyncInit);
-
-
-// DEFAULT
-gulp.task('default',
-  gulp.parallel('browserSync', 'watch')
-);
-
 
 //CLEAN
 gulp.task('clean', function() {
@@ -129,3 +105,31 @@ gulp.task('build',
       'copy-templates',
       'copy-php')
   ));
+
+  gulp.task('watch', function() {
+    gulp.watch(paths.src + '**/*.css', gulp.series('build-css',
+    function(done) {
+      browserSync.reload();
+      done();
+    }));
+    gulp.watch(paths.src + '**/*.html', gulp.series('build-html', 'replace-script-tags', 'copy-templates',
+    function(done) {
+      browserSync.reload();
+      done();
+    }));
+    gulp.watch(paths.src + '*.js', gulp.series('build-js',
+    function(done) {
+      browserSync.reload();
+      done();
+    }));
+    gulp.watch(paths.src + 'php/*.php', gulp.series('copy-php',
+    function(done) {
+      browserSync.reload();
+      done();
+    }));
+  });
+
+// DEFAULT
+gulp.task('default',
+  gulp.series('build', gulp.parallel('browserSync', 'watch'))
+);
