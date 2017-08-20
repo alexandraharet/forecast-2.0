@@ -63,7 +63,7 @@
                 var timezoneOffset = $interpolate(scope.timezoneOffset);
                 scope.timezoneOffset = timezoneOffset(scope);
             },
-            controller: function($scope) {
+            controller: ["$scope", function($scope) {
                 var weatherData = {};
                 var vm = this;
                 vm.renderResult = {};
@@ -107,7 +107,7 @@
                     convertToStandard(weatherData);
                 });
 
-            },
+            }],
             controllerAs: 'hourly'
         };
     }]);
