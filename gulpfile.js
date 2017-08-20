@@ -86,7 +86,7 @@ gulp.task('replace-script-tags', function() {
 gulp.task('build-js', function() {
   return gulp.src([paths.src + 'js/app.js', paths.src + 'services/*.js', paths.src + 'controllers/*.js', paths.src + 'directives/*.js'])
   .pipe(concat('scripts.min.js'))
-  // .pipe(minifyJs())
+  .pipe(minifyJs())
   .pipe(gulp.dest(paths.dist));
 });
 
