@@ -49,21 +49,6 @@
             return (typeof(num) === 'number') ? Math.round(num * 100) : null;
         }
 
-        // function convertToStandard(weatherResult) {
-        //     angular.forEach(properties in weatherResult, function(key, value) {
-        //         vm.renderResult.temperature =
-        //             weatherService.convertToCelsius(weatherResult.currently.apparentTemperature);
-        //         vm.renderResult.minTemp =
-        //             weatherService.convertToCelsius(weatherResult.daily.data[1].temperatureMin);
-        //         vm.renderResult.maxTemp =
-        //             weatherService.convertToCelsius(weatherResult.daily.data[1].temperatureMax);
-        //         vm.renderResult.date =
-        //             weatherService.convertToDate(weatherResult.daily.data[1].time);
-        //         vm.renderResult.precip =
-        //             weatherService.convertToPercentage(weatherResult.currently.precipProbability);
-        //     });
-        // }
-
         return exports;
     }
 })();
