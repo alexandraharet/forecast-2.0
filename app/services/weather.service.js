@@ -38,28 +38,15 @@
         }
 
         function convertToCelsius(Fah) {
-            if(Fah) {
-                var temperature = Math.round((Fah - 32)/1.8);
-                return temperature;
-            } else {
-                return null;
-            }
+            return Fah ?  Math.round((Fah - 32)/1.8) : null;
         }
 
         function convertToDate(time) {
-            if(time) {
-                return new Date(time * 1000);
-            } else {
-                return null;
-            }
+            return time ? new Date(time * 1000) : null;
         }
 
         function convertToPercentage(num) {
-            if(typeof(num) === 'number') {
-                return Math.round(num * 100);
-            } else {
-                return null;
-            }
+            return (typeof(num) === 'number') ? Math.round(num * 100) : null;
         }
 
         // function convertToStandard(weatherResult) {
