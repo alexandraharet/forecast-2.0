@@ -64,26 +64,6 @@
 			} else {
 				convertedOffset += '00';
 			}
-
-			// if (isNegative) {
-			// 	if(rawOffset * -100 < 1000) {
-			// 		convertedOffset += '0' + str.slice(1,2);
-			// 	} else {
-			// 		convertedOffset += str.slice(1,3);
-			// 	}
-			// } else if (rawOffset * 100 < 1000) {
-			// 	convertedOffset += '0' + str.slice(1,2);
-			// } else {
-			// 	convertedOffset += str.slice(0,1);
-			// }
-
-			// if(rawOffset * 100 % 100 == 50 || rawOffset * 100 % 100 == -50) {
-			// 	convertedOffset += '30';
-			// } else if (rawOffset * 100 % 100 == 75 || rawOffset * 100 % 100 == -75) {
-			// 	convertedOffset += '45';
-			// } else {
-			// 	convertedOffset += '00';
-			// }
 			return convertedOffset;
 		};
 
