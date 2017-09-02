@@ -28,11 +28,11 @@ small {
 }
 
 .title {
-    margin: 2em auto 1em;
+    margin: 2rem auto 1rem;
 }
 
 .instructions {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
   color: rgba(225, 225, 225, 0.9);
 }
 
@@ -67,7 +67,7 @@ small {
     display: block;
     position: relative;
     left: calc(50% - 50px);
-    top: 5em;
+    top: 5rem;
     border: 5px solid rgba(225, 255, 255, 0.2);
     border-top: 5px solid rgba(225, 255, 255, 0.6);
     border-radius: 50%;
@@ -88,8 +88,8 @@ small {
 }
 
 #mainPanel {
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     position: relative;
     width: 100%;
 }
@@ -98,10 +98,16 @@ weather-result.ng-animate {
     transition: visibility fade-in-out 10s;
 }
 
-.btn-outline-secondary {
-    color: #e6e6e6;
+.btn-secondary:not(.toggle) {
+    background-color: transparent;
+    color: #fff;
     border-color: #e6e6e6;
 }
+
+.btn-secondary:hover:not(.toggle) {
+  border-color: #b3b3b3;
+}
+
 
 .form-control {
     background-color: rgba(0,0,0,0.1);
@@ -131,7 +137,7 @@ wf-weather-report-daily img,
 
 wf-weather-report-hourly,
 wf-weather-report-daily {
-    padding: 1em;
+    padding: 1rem;
 }
 
 wf-weather-report-hourly p,
@@ -156,12 +162,14 @@ wf-weather-report-daily:nth-of-type(2n) {
     background-color: rgba(0, 0, 0, 0.50);
 }
 
+/*xs and sm*/
 @media screen and (max-width: 575px) {
     body {
         font-size: 0.72em;
     }
 }
 
+/*sm and up*/
 @media (min-width: 576px) {
     form {
         padding-right:1em;
@@ -172,7 +180,15 @@ wf-weather-report-daily:nth-of-type(2n) {
     }
 }
 
+
+/*xs*/
 @media (max-width: 577px) {
+  .title, .instructions {
+    display: none;
+  }
+  .form-inline {
+    margin-top: 2rem;
+  }
     #search-button {
         margin-top: 1em;
     }
