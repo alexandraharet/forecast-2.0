@@ -38,61 +38,53 @@
 		}
 
 		function convertTimezoneOffset(rawOffset) {
-			var covertedOffset = '';
+			var convertedOffset = '';
 			var str = (rawOffset * 100).toString();
 			var isNegative = false;
 
 			if (rawOffset < 0) {
-				covertedOffset += '-';
+				convertedOffset += '-';
 				isNegative = true;
 			} else {
-				covertedOffset += '+';
+				convertedOffset += '+';
 			}
 
 			if (isNegative) {
 				// builds the first two digits of the timezoneOffset
-				if (str.length === 5) {
-					covertedOffset += str.slice(1,3);
-				} else {
-					covertedOffset += '0' + str.slice(1,2);
-				}
+				(str.length === 5) ? convertedOffset += str.slice(1,3) : convertedOffset += '0' + str.slice(1,2);
 			} else {
-				if (str.length === 4) {
-					covertedOffset += str.slice(0,2);
-				} else {
-					covertedOffset += '0' + str.slice(0,1);
-				}
+				(str.length === 4) ? convertedOffset += str.slice(0,2) : convertedOffset += '0' + str.slice(0,1);
 			}
 
 			// builds the last two digits of the timezoneOffset
 			if(str.slice(-2) == 50) {
-				covertedOffset += '30';
+				convertedOffset += '30';
 			} else if(str.slice(-2) == 75) {
-				covertedOffset += '45';
+				convertedOffset += '45';
 			} else {
-				covertedOffset += '00';
+				convertedOffset += '00';
 			}
 
 			// if (isNegative) {
 			// 	if(rawOffset * -100 < 1000) {
-			// 		covertedOffset += '0' + str.slice(1,2);
+			// 		convertedOffset += '0' + str.slice(1,2);
 			// 	} else {
-			// 		covertedOffset += str.slice(1,3);
+			// 		convertedOffset += str.slice(1,3);
 			// 	}
 			// } else if (rawOffset * 100 < 1000) {
-			// 	covertedOffset += '0' + str.slice(1,2);
+			// 	convertedOffset += '0' + str.slice(1,2);
 			// } else {
-			// 	covertedOffset += str.slice(0,1);
+			// 	convertedOffset += str.slice(0,1);
 			// }
 
 			// if(rawOffset * 100 % 100 == 50 || rawOffset * 100 % 100 == -50) {
-			// 	covertedOffset += '30';
+			// 	convertedOffset += '30';
 			// } else if (rawOffset * 100 % 100 == 75 || rawOffset * 100 % 100 == -75) {
-			// 	covertedOffset += '45';
+			// 	convertedOffset += '45';
 			// } else {
-			// 	covertedOffset += '00';
+			// 	convertedOffset += '00';
 			// }
-			return covertedOffset;
+			return convertedOffset;
 		};
 
 		//TODO
