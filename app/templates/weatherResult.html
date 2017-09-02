@@ -1,10 +1,23 @@
 <div ng-if="mainCtrl.submitted " id='mainPanel'>
     <div class="loader" ng-if="mainCtrl.loading"></div>
-    <div ng-show="!mainCtrl.loading" ng-controller="switchViewController as switchViewCtrl" class="fade-in">
+    <div ng-show="!mainCtrl.loading" class="fade-in" ng-controller="switchUnitsController as switchUnitsCtrl">
 
         <div class="row w-header text-center text-sm-left">
             <div class="col">
-                <h3 class="text-center text-sm-left">{{ mainCtrl.formattedAddress }}</h3>
+                <h3 class="text-center text-sm-left float-left">{{ mainCtrl.formattedAddress }}</h3>
+
+                <div class="btn-group toggle float-right" >
+                    <label class="btn btn-secondary btn-sm toggle" ng-class="selectCelsius(unitSystem)">
+                        <input type="radio" ng-model="unitSystem" value="celsius"
+                               name="options" id="celsius" autocomplete="off"/>
+                        °C
+                    </label>
+                    <label class="btn btn-secondary btn-sm toggle" ng-class="selectFahrenheit(unitSystem)">
+                        <input type="radio" ng-model="unitSystem" value="fahrenheit"
+                               name="options" id="fahrenheit" autocomplete="off" ng-checked/>
+                        °F
+                    </label>
+                </div>
             </div>
         </div>
         <div class="row w-currently text-center">
@@ -20,7 +33,7 @@
 
         <div class="row">
             <div class="col">
-            <div class="btn-group toggle float-right">
+            <div class="btn-group toggle float-right" ng-controller="switchViewController as switchViewCtrl">
                 <label class="btn btn-secondary btn-sm toggle" ng-class="showHourly(selectedView)">
                     <input type="radio" ng-model="selectedView" value="hourly"
                            name="options" id="option1" autocomplete="off"/>
@@ -32,6 +45,7 @@
                     Daily
                 </label>
             </div>
+
                 <!-- <wf-local-time timezone-offset="mainCtrl.timezoneOffset">
             </wf-local-time> -->
             <!-- <a ng-click="timeframe = '24h'">Right now</a> |
