@@ -1,5 +1,5 @@
-<p>{{daily.renderResult.localtime | date : 'd MMM' : timezoneOffset }}</p>
-<!-- <h4>{{hourly.renderResult.summary}}</h4> -->
+<p>{{daily.renderResult.localtime | date : 'EEE' : timezoneOffset }}</p>
+<h4>{{hourly.renderResult.summary}}</h4>
 <img ng-src="img/{{daily.renderResult.icon}}.png?"/>
 <p>{{daily.renderResult.temperatureMax}}°
     <small> / {{daily.renderResult.temperatureMin}}°</small>
