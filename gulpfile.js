@@ -7,6 +7,7 @@ var clean = require('gulp-clean');
 var replace = require('gulp-replace');
 var browserSync = require('browser-sync').create();
 var insertLines = require('gulp-insert-lines');
+var inject = require('gulp-inject');
 var postcss      = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 
@@ -37,13 +38,19 @@ gulp.task('autoprefixer', function() {
   .pipe(gulp.dest(paths.dest));
 });
 
-//ADD SCRIPTS AND STYLES TAGS
-gulp.task('add-scripts-and-styles', function() {
+// ADD STYLES TAG
+gulp.task('add-styles', function() {
   return gulp.src(paths.dest + 'index.html')
   .pipe(insertLines({
     'before': /<\/head>$/,
     'lineBefore': '<link rel="stylesheet" type="text/css" href="styles.min.css" />'
   }))
+  .pipe(gulp.dest(paths.dest));
+});
+
+//ADD SCRIPT TAG
+gulp.task('add-scripts', function() {
+  return gulp.src(paths.dest + 'index.html')
   .pipe(insertLines({
     'before': /<\/head>$/,
     'lineBefore': '<script src="scripts.min.js"></script>',
@@ -51,12 +58,24 @@ gulp.task('add-scripts-and-styles', function() {
   .pipe(gulp.dest(paths.dest));
 });
 
+gulp.task('dev-add-scripts', function() {
+  var target = gulp.src(paths.dest + 'index.html');
+  var source = gulp.src([paths.dest + 'js/app.js', paths.dest + 'js/directives/*.js', paths.dest + 'js/controllers/*.js', paths.dest + 'js/services/*.js'], {read: false});
+  return target.pipe((inject(source, { relative: true })))
+  .pipe(gulp.dest(paths.dest));
+});
+
 //BUILD AND COPY TASKS
 gulp.task('build-js', function() {
-  return gulp.src([paths.src + 'js/app.js', paths.src + 'directives/*.js', paths.src + 'controllers/*.js', paths.src + 'services/*.js'])
+  return gulp.src([paths.src + 'js/app.js', paths.src + 'js/directives/*.js', paths.src + 'js/controllers/*.js', paths.src + 'js/services/*.js'])
   .pipe(concat('scripts.min.js'))
   .pipe(minifyJs())
   .pipe(gulp.dest(paths.dest));
+});
+
+gulp.task('dev-build-js', function() {
+  return gulp.src([paths.src + 'js/**/*.js'])
+  .pipe(gulp.dest(paths.dest + 'js/'));
 });
 
 gulp.task('build-css', gulp.series(
@@ -93,8 +112,19 @@ gulp.task('copy-php', function() {
 gulp.task('build',
 gulp.series('clean',
 gulp.parallel(
-  gulp.series('build-html', 'add-scripts-and-styles'),
+  gulp.series('build-html', 'add-styles', 'add-scripts'),
   'build-js',
+  'build-css',
+  'copy-images',
+  'copy-templates',
+  'copy-php')
+));
+
+gulp.task('dev-build',
+gulp.series('clean',
+gulp.parallel(
+  gulp.series('build-html', 'add-styles', 'dev-add-scripts'),
+  'dev-build-js',
   'build-css',
   'copy-images',
   'copy-templates',
@@ -108,7 +138,7 @@ gulp.task('watch', function() {
     browserSync.reload();
     done();
   }));
-  gulp.watch(paths.src + '**/*.html', gulp.series('build-html', 'add-scripts-and-styles', 'copy-templates',
+  gulp.watch(paths.src + '**/*.html', gulp.series('build-html', 'add-styles', 'add-scripts', 'copy-templates',
   function(done) {
     browserSync.reload();
     done();
@@ -128,4 +158,8 @@ gulp.task('watch', function() {
 // DEFAULT
 gulp.task('default',
 gulp.series('build', gulp.parallel('browserSync', 'watch'))
+);
+
+gulp.task('develop',
+gulp.series('dev-build', gulp.parallel('browserSync', 'watch'))
 );
