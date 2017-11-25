@@ -162,7 +162,7 @@ gulp.task('dev-watch', function() {
     browserSync.reload();
     done();
   }));
-  gulp.watch(paths.src + '**/*.html', gulp.series('build-html', 'add-styles', 'add-scripts', 'copy-templates',
+  gulp.watch(paths.src + '**/*.html', gulp.series('build-html', 'add-styles', 'dev-add-scripts', 'copy-templates',
   function(done) {
     browserSync.reload();
     done();
