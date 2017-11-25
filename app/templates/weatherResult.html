@@ -9,11 +9,11 @@
                 <div class="btn-group toggle float-right" >
                     <label class="btn btn-secondary btn-sm toggle" ng-class="selectCelsius(unitSystem)">
                         <input type="radio" ng-model="unitSystem" value="celsius"
-                               name="options" id="celsius" autocomplete="off"/>
+                               name="options" id="celsius" autocomplete="off" ng-click="weatherResult.changeUnitSystem(celsius)"/>
                         °C
                     </label>
                     <label class="btn btn-secondary btn-sm toggle" ng-class="selectFahrenheit(unitSystem)">
-                        <input type="radio" ng-model="unitSystem" value="fahrenheit"
+                        <input type="radio" ng-model="unitSystem" value="fahrenheit" ng-click="weatherResult.changeUnitSystem(fahrenheit)"
                                name="options" id="fahrenheit" autocomplete="off" ng-checked/>
                         °F
                     </label>
@@ -45,7 +45,7 @@
                     Daily
                 </label>
             </div>
-            
+
                 <!-- TODO -->
                 <!-- <wf-local-time timezone-offset="mainCtrl.timezoneOffset">
             </wf-local-time> -->
@@ -59,14 +59,18 @@
             <wf-weather-wrapper-hourly class="row no-gutters align-items-center w-hourly"
                                 ng-if="mainCtrl.weatherResult"
                                 timezone-offset="mainCtrl.timezoneOffset"
-                                weather-result="mainCtrl.weatherResult"></wf-weather-wrapper-hourly>
+                                weather-result="mainCtrl.weatherResult"
+                                unit-system="unitSystem">
+            </wf-weather-wrapper-hourly>
         </div>
 
         <div ng-switch-when="daily" class="fade-in">
             <wf-weather-wrapper-daily class="row no-gutters align-items-center w-hourly"
                                 ng-if="mainCtrl.weatherResult"
                                 timezone-offset="mainCtrl.timezoneOffset"
-                                weather-result="mainCtrl.weatherResult"></wf-weather-wrapper-daily>
+                                weather-result="mainCtrl.weatherResult"
+                                unit-system="unitSystem">
+            </wf-weather-wrapper-daily>
         </div>
     </div>
 
