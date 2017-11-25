@@ -4,8 +4,9 @@
       weatherResult.daily.data[3],
       weatherResult.daily.data[4]
     ] track by $index"
-     weather="dataPoint"
-                              address="addressService.address"
-                              convert-to-celsius="convertToCelsius(temperature)"
-                              timezone-offset="timezoneOffset">
+        weather="dataPoint"
+        address="addressService.address"
+        convert-to-celsius="convertToCelsius(temperature)"
+        timezone-offset="timezoneOffset"
+        unit-system="unitSystem">
 </wf-weather-report-daily>

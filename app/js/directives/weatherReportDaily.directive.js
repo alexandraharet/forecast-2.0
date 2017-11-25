@@ -8,7 +8,8 @@
             templateUrl: "templates/weatherReportDaily.html",
             scope: {
                 weather: "=",
-                timezoneOffset: '='
+                timezoneOffset: '=',
+                unitSystem: '='
             },
             link: function (scope, elm, attrs) {
                 var timezoneOffset = $interpolate(scope.timezoneOffset);
@@ -35,11 +36,14 @@
                 }
 
                 function updateRenderedResult() {
+                    var temp = vm.unitSystem;
+                    console.log(temp);
                     vm.timezoneOffset =  $scope.timezoneOffset;
                     vm.renderResult = {};
                     angular.forEach(weatherData, function(value, key) {
                         if(vm.renderResult[key] !== weatherData[key]) vm.renderResult[key] = value;
                     });
+                    convertToStandard(vm.renderResult);
                 }
 
                 function convertToStandard(weatherResult) {
@@ -56,7 +60,10 @@
                 $scope.$watch('weather', function(){
                     updatedWeatherData();
                     updateRenderedResult();
-                    convertToStandard(weatherData);
+                });
+
+                $scope.$watch('unitSystem', function(){
+                    console.log('wathcing unitSystem: ' + $scope.unitSystem);
                 });
 
             }],

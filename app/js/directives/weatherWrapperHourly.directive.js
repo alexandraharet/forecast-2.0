@@ -9,7 +9,8 @@
             scope: {
                 weatherResult: "=",
                 convertToCelsius: "&",
-                timezoneOffset: '='
+                timezoneOffset: '=',
+                unitSystem: '@'
             }
         };
     });
