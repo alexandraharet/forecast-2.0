@@ -27,7 +27,7 @@
             <div class="col-xs-12 col-sm-8 col-md-9 text-sm-left">
                 <h4>{{ mainCtrl.renderResult.summary }} {{ mainCtrl.renderResult.temperature }}&deg;  <small> / feels like {{ mainCtrl.renderResult.temperature}}&deg;</small></h4>
                 <p>Precipitation: {{ mainCtrl.renderResult.precip }}%</p>
-                <p>Wind speed: {{ mainCtrl.renderResult.windSpeed }} km/h</p>
+                <p>Wind speed: {{ mainCtrl.renderResult.windSpeed }} {{ mainCtrl.renderResult.distanceUnit }}</p>
             </div>
         </div>
 
@@ -45,7 +45,8 @@
                     Daily
                 </label>
             </div>
-
+            
+                <!-- TODO -->
                 <!-- <wf-local-time timezone-offset="mainCtrl.timezoneOffset">
             </wf-local-time> -->
             <!-- <a ng-click="timeframe = '24h'">Right now</a> |

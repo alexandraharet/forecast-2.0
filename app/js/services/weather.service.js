@@ -11,7 +11,10 @@
             callWeatherApi: callWeatherApi,
             convertToCelsius: convertToCelsius,
             convertToDate: convertToDate,
-            convertToPercentage: convertToPercentage
+            convertToPercentage: convertToPercentage,
+            convertToStandard: convertToStandard,
+            convertToImperial: convertToImperial,
+            convertToMiles: convertToMiles
         };
         var weatherApiResponse;
 
@@ -27,6 +30,31 @@
             });
             return weatherApiResponse;
         }
+
+        function convertToImperial(weatherResult) {
+            var result = {
+                windSpeed: convertToMiles(weatherResult.currently.windSpeed),
+                distanceUnit: 'mph',
+                temperatureUnit: '°F'
+            }
+            return result;
+        }
+
+        function convertToMiles(km) {
+            return km ? Math.round(km * 0.621371) : null;
+        }
+
+        function convertToStandard(weatherResult) {
+			var result = {
+                temperature:
+                convertToCelsius(weatherResult.currently.apparentTemperature),
+                minTemp: convertToCelsius(weatherResult.daily.data[1].temperatureMin),
+                maxTemp: convertToCelsius(weatherResult.daily.data[1].temperatureMax),
+                distanceUnit: 'km/h',
+                temperatureUnit: '°C'
+            }
+			return result;
+		}
 
         function callWeatherApi(lat, lon) {
             var deferred = $q.defer();

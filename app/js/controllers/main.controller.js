@@ -14,17 +14,11 @@
 
 		var vm = this;
 
-		function convertToStandard(weatherResult) {
-			vm.renderResult.temperature =
-			weatherService.convertToCelsius(weatherResult.currently.apparentTemperature);
-			vm.renderResult.minTemp =
-			weatherService.convertToCelsius(weatherResult.daily.data[1].temperatureMin);
-			vm.renderResult.maxTemp =
-			weatherService.convertToCelsius(weatherResult.daily.data[1].temperatureMax);
-			vm.renderResult.date =
-			weatherService.convertToDate(weatherResult.daily.data[1].time);
-			vm.renderResult.precip =
-			weatherService.convertToPercentage(weatherResult.currently.precipProbability);
+		function convertToStandard() {
+			var result = weatherService.convertToStandard(vm.weatherResult);
+			 angular.forEach(result, function(value, key) {
+				 vm.renderResult[key] = value;
+			 });
 		}
 
 		function buildRenderResultObject(weatherResult) {
@@ -32,8 +26,13 @@
 			vm.renderResult = {
 				icon: weatherResult.currently.icon,
 				summary: weatherResult.currently.summary,
-				windSpeed: weatherResult.currently.windSpeed,
-				localTime: getLocalTime
+				windSpeed: weatherService.convertToMiles(weatherResult.currently.windSpeed),
+				localTime: getLocalTime,
+				date: weatherService.convertToDate(weatherResult.daily.data[1].time),
+				precip: weatherService.convertToPercentage(weatherResult.currently.precipProbability),
+				temperature: weatherResult.currently.apparentTemperature,
+				minTemp: weatherResult.daily.data[1].temperatureMin,
+				maxTemp: weatherResult.daily.data[1].temperatureMax
 			};
 		}
 
@@ -68,20 +67,18 @@
 		};
 
 		//TODO
-		// var WeatherResultConstructor = function(apiResponse, dataPoint, altDataPoint) {
-		// 	function transformToBracketNotation(dotNotation) {
-		// 		var postStr = dotNotation.replace(".", "['");
-		// 		postStr = postStr.replace(/\./g, "']['");
-		//
-		// 	}
-		// 	this.temperature = apiResponse[dataPoint].apparentTemperature;
-		// 	// this.feelsLike = apiResponse[dataPoint].feelsLike;
-		// 	// this.minTemp = apiResponse. "daily.data[1]" .temperatureMin; // use other Data Point
-		// 	this.minTemp = apiResponse['daily']['data']['1']['temperatureMin']; // use other Data Point
-		// 	this.maxTemp = apiResponse.altDataPoint.temperatureMax;
-		// 	this.date = apiResponse[altDataPoint].time;
-		// 	this.precip = apiResponse[altDataPoint].precipProbability;
-		// };
+		var WeatherResultConstructor = function(apiResponse, dataPoint, ...[a, b, c]) {
+			function transformToBracketNotation(dotNotation) {
+				var postStr = dotNotation.replace(".", "['");
+				postStr = postStr.replace(/\./g, "']['");
+
+			}
+			this.temperature = apiResponse[dataPoint].apparentTemperature;
+			this.feelsLike = apiResponse[dataPoint].apparentTemperature;
+			this.maxTemp = apiResponse[a][b][c].temperatureMax;
+			this.date = apiResponse[a][b][c].time;
+			this.precip = apiResponse[a][b][c].precipProbability;
+		};
 
 		vm.address = "";
 		vm.submitted = false;
@@ -118,10 +115,9 @@
 						.then(
 							function(weatherResponse) {
 								vm.weatherResult = weatherResponse.data;
-								// var renderResponse = new WeatherResultConstructor(weatherResponse.data, 'currently', 'daily.data.1'); // TODO
-								// buildRenderResultObject(vm.weatherResult); // TODO
+								var renderResponse = new WeatherResultConstructor(weatherResponse.data, 'currently', 'daily', 'data', '1');
 								buildRenderResultObject(vm.weatherResult);
-								convertToStandard(vm.weatherResult);
+								convertToStandard();
 								vm.loading = false;
 							});
 						})

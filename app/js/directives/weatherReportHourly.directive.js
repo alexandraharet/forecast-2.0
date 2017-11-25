@@ -26,10 +26,10 @@
                         time: $scope.weather.time,
                         summary: $scope.weather.summary,
                         icon: $scope.weather.icon,
-                        temperature: $scope.weather.temperature,
-                        feelsLike: $scope.weather.apparentTemperature,
-                        precipitation: $scope.weather.precipProbability,
-                        windSpeed: $scope.weather.windSpeed,
+                        temperature: Math.round($scope.weather.temperature),
+                        apparentTemperature: Math.round($scope.weather.apparentTemperature),
+                        precipProbability: $scope.weather.precipProbability,
+                        windSpeed: Math.round($scope.weather.windSpeed)
                     };
                 }
 
@@ -37,25 +37,19 @@
                     vm.timezoneOffset =  $scope.timezoneOffset;
                     vm.renderResult = {};
                     angular.forEach(weatherData, function(value, key) {
-                        if(vm.renderResult[key] !== weatherData[key]) vm.renderResult[key] = value;
+                        vm.renderResult[key] = value;
                     });
                 }
 
-                function convertToStandard(weatherResult) {
-                    vm.renderResult.temperature =
-                    weatherService.convertToCelsius(weatherResult.temperature);
-                    vm.renderResult.feelsLike =
-                    weatherService.convertToCelsius(weatherResult.feelsLike);
+                function convertToLocalTime(weatherResult) {
                     vm.renderResult.localtime =
-                    weatherService.convertToDate(weatherResult.time);
-                    vm.renderResult.precipitation =
-                    weatherService.convertToPercentage(weatherResult.precipitation);
+                    weatherService.convertToDate(weatherResult.time)
                 }
 
                 $scope.$watch('weather', function(){
                     updatedWeatherData();
                     updateRenderedResult();
-                    convertToStandard(weatherData);
+                    convertToLocalTime(weatherData);
                 });
 
             }],
