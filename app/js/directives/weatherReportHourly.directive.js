@@ -19,8 +19,11 @@
                 var weatherData = {};
                 var vm = this;
                 vm.renderResult = {};
-
                 vm.timezoneOffset = '';
+
+                updatedWeatherData();
+                updateRenderedResult();
+                convertToLocalTime(weatherData);
 
                 function updatedWeatherData() {
                     weatherData = {
@@ -29,8 +32,10 @@
                         icon: $scope.weather.icon,
                         temperature: Math.round($scope.weather.temperature),
                         apparentTemperature: Math.round($scope.weather.apparentTemperature),
-                        precipProbability: $scope.weather.precipProbability,
-                        windSpeed: Math.round($scope.weather.windSpeed)
+                        precipitation: weatherService.convertToPercentage($scope.weather.precipProbability),
+                        windSpeed: Math.round($scope.weather.windSpeed),
+                        speedUnit: 'mph',
+                        temperatureUnit: '°F'
                     };
                 }
 
@@ -38,7 +43,7 @@
                     vm.timezoneOffset =  $scope.timezoneOffset;
                     vm.renderResult = {};
                     angular.forEach(weatherData, function(value, key) {
-                        vm.renderResult[key] = value;
+                        if(vm.renderResult[key] !== weatherData[key]) vm.renderResult[key] = value;
                     });
                 }
 
@@ -47,10 +52,13 @@
                     weatherService.convertToDate(weatherResult.time)
                 }
 
-                $scope.$watch('weather', function(){
-                    updatedWeatherData();
-                    updateRenderedResult();
-                    convertToLocalTime(weatherData);
+                $scope.$watch('unitSystem', function() {
+                    if ($scope.unitSystem === 'fahrenheit') {
+                        angular.extend(vm.renderResult, weatherService.convertToImperial(vm.renderResult));
+                    }
+                    if ($scope.unitSystem === 'celsius') {
+                        angular.extend(vm.renderResult, weatherService.convertToStandard(vm.renderResult));
+                    }
                 });
 
             }],

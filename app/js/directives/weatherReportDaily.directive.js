@@ -20,52 +20,41 @@
                 var weatherData = {};
                 var vm = this;
                 vm.renderResult = {};
-
                 vm.timezoneOffset = '';
+
+                updatedWeatherData();
+                updateRenderedResult();
 
                 function updatedWeatherData() {
                     weatherData = {
-                        time: $scope.weather.time,
+                        time: weatherService.convertToDate($scope.weather.time),
                         summary: $scope.weather.summary,
                         icon: $scope.weather.icon,
-                        temperatureMin: $scope.weather.temperatureMin,
-                        temperatureMax: $scope.weather.temperatureMax,
-                        precipitation: $scope.weather.precipProbability,
+                        minTemp: $scope.weather.temperatureMin,
+                        maxTemp: $scope.weather.temperatureMax,
+                        precipitation: weatherService.convertToPercentage($scope.weather.precipProbability),
                         windSpeed: $scope.weather.windSpeed,
+                        speedUnit: 'mph',
+                        temperatureUnit: '°F'
                     };
                 }
 
                 function updateRenderedResult() {
-                    var temp = vm.unitSystem;
-                    console.log(temp);
                     vm.timezoneOffset =  $scope.timezoneOffset;
                     vm.renderResult = {};
                     angular.forEach(weatherData, function(value, key) {
                         if(vm.renderResult[key] !== weatherData[key]) vm.renderResult[key] = value;
                     });
-                    convertToStandard(vm.renderResult);
                 }
 
-                function convertToStandard(weatherResult) {
-                    vm.renderResult.temperatureMin =
-                    weatherService.convertToCelsius(weatherResult.temperatureMin);
-                    vm.renderResult.temperatureMax =
-                    weatherService.convertToCelsius(weatherResult.temperatureMax);
-                    vm.renderResult.localtime =
-                    weatherService.convertToDate(weatherResult.time);
-                    vm.renderResult.precipitation =
-                    weatherService.convertToPercentage(weatherResult.precipitation);
-                }
-
-                $scope.$watch('weather', function(){
-                    updatedWeatherData();
-                    updateRenderedResult();
+                $scope.$watch('unitSystem', function() {
+                    if ($scope.unitSystem === 'fahrenheit') {
+                        angular.extend(vm.renderResult, weatherService.convertToImperial(vm.renderResult));
+                    }
+                    if ($scope.unitSystem === 'celsius') {
+                        angular.extend(vm.renderResult, weatherService.convertToStandard(vm.renderResult));
+                    }
                 });
-
-                $scope.$watch('unitSystem', function(){
-                    console.log('wathcing unitSystem: ' + $scope.unitSystem);
-                });
-
             }],
             controllerAs: 'daily'
         };
