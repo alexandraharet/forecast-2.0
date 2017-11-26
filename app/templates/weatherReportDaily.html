@@ -1,8 +1,9 @@
-<p>{{daily.renderResult.localtime | date : 'EEE' : timezoneOffset }}</p>
+<p>{{daily.renderResult.time | date : 'EEE' : timezoneOffset }}</p>
 <h4>{{hourly.renderResult.summary}}</h4>
+
 <img ng-src="img/{{daily.renderResult.icon}}.png?"/>
-<p>{{daily.renderResult.temperatureMax}}°
-    <small> / {{daily.renderResult.temperatureMin}}°</small>
-    <!-- / <small>Feels Like: {{hourly.renderResult.feelsLike}}°C</small> -->
+<p>{{daily.renderResult.maxTemp}}{{daily.renderResult.temperatureUnit}}
+    <small> / {{daily.renderResult.minTemp}}{{daily.renderResult.temperatureUnit}}</small>
 </p>
-<!-- <p>Precip.: {{hourly.renderResult.precipitation}}%</p> -->
+<p>Wind: {{daily.renderResult.windSpeed}} {{daily.renderResult.speedUnit}}</p>
+<p>Precip: {{daily.renderResult.precipitation}}%</p>
