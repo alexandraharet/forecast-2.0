@@ -14,25 +14,20 @@
 
 		var vm = this;
 
-		function convertToStandard() {
-			var result = weatherService.convertToStandard(vm.weatherResult);
-			 angular.forEach(result, function(value, key) {
-				 vm.renderResult[key] = value;
-			 });
-		}
-
 		function buildRenderResultObject(weatherResult) {
 			var getLocalTime =  weatherService.convertToDate(weatherResult.currently.time);
 			vm.renderResult = {
 				icon: weatherResult.currently.icon,
 				summary: weatherResult.currently.summary,
-				windSpeed: weatherService.convertToMiles(weatherResult.currently.windSpeed),
+				windSpeed: Math.round(weatherResult.currently.windSpeed),
 				localTime: getLocalTime,
 				date: weatherService.convertToDate(weatherResult.daily.data[1].time),
-				precip: weatherService.convertToPercentage(weatherResult.currently.precipProbability),
+				precipitation: weatherService.convertToPercentage(weatherResult.currently.precipProbability),
 				temperature: weatherResult.currently.apparentTemperature,
 				minTemp: weatherResult.daily.data[1].temperatureMin,
-				maxTemp: weatherResult.daily.data[1].temperatureMax
+				maxTemp: weatherResult.daily.data[1].temperatureMax,
+				speedUnit: 'mph',
+				temperatureUnit: '°F'
 			};
 		}
 
@@ -66,18 +61,12 @@
 			return convertedOffset;
 		};
 
-		//TODO
-		var WeatherResultConstructor = function(apiResponse, dataPoint, ...[a, b, c]) {
-			function transformToBracketNotation(dotNotation) {
-				var postStr = dotNotation.replace(".", "['");
-				postStr = postStr.replace(/\./g, "']['");
-
-			}
-			this.temperature = apiResponse[dataPoint].apparentTemperature;
-			this.feelsLike = apiResponse[dataPoint].apparentTemperature;
+		var WeatherResultConstructor = function(apiResponse, mainDataPoint, ...[a, b, c]) {
+			this.temperature = apiResponse[mainDataPoint].apparentTemperature;
+			this.feelsLike = apiResponse[mainDataPoint].apparentTemperature;
 			this.maxTemp = apiResponse[a][b][c].temperatureMax;
 			this.date = apiResponse[a][b][c].time;
-			this.precip = apiResponse[a][b][c].precipProbability;
+			this.precipiation = apiResponse[a][b][c].precipProbability;
 		};
 
 		vm.address = "";
@@ -117,7 +106,6 @@
 								vm.weatherResult = weatherResponse.data;
 								var renderResponse = new WeatherResultConstructor(weatherResponse.data, 'currently', 'daily', 'data', '1');
 								buildRenderResultObject(vm.weatherResult);
-								convertToStandard();
 								vm.loading = false;
 							});
 						})
