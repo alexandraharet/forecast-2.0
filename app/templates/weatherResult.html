@@ -24,11 +24,11 @@
             <div class="col-xs-12 col-md-3 col-sm-4">
                 <img ng-src="img/{{mainCtrl.renderResult.icon}}.png?" />
             </div>
-            <div class="col-xs-12 col-sm-8 col-md-9 text-sm-left">
-                <h4>{{ mainCtrl.renderResult.summary }} {{ mainCtrl.renderResult.temperature }}&deg;  <small> / feels like {{ mainCtrl.renderResult.temperature}}&deg;</small></h4>
-                <p>Precipitation: {{ mainCtrl.renderResult.precip }}%</p>
-                <p>Wind speed: {{ mainCtrl.renderResult.windSpeed }} {{ mainCtrl.renderResult.distanceUnit }}</p>
-            </div>
+            <wf-weather-summary class="col-xs-12 col-sm-8 col-md-9 text-sm-left"
+                    ng-if="mainCtrl.weatherResult"
+                    weather="mainCtrl.weatherResult"
+                    unit-system="unitSystem">
+            </wf-weather-summary>
         </div>
 
         <div class="row">
