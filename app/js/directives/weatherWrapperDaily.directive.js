@@ -8,9 +8,8 @@
             templateUrl: "templates/weatherWrapperDaily.html",
             scope: {
                 weatherResult: "=",
-                convertToCelsius: "&",
                 timezoneOffset: '=',
-                unitSystem: '@'
+                unitSystem: "="
             }
         };
     });

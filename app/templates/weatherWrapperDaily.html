@@ -6,7 +6,7 @@
     ] track by $index"
         weather="dataPoint"
         address="addressService.address"
-        convert-to-celsius="convertToCelsius(temperature)"
+        convert-to-celsius="weatherService.convertToCelsius"
         timezone-offset="timezoneOffset"
         unit-system="unitSystem">
 </wf-weather-report-daily>

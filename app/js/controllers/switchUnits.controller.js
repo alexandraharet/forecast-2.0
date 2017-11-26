@@ -8,7 +8,7 @@
 
 	function controller($scope) {
 		$scope.unitSystem = 'celsius';
-		$scope.selectCelsius = function(unitSystem) { 
+		$scope.selectCelsius = function(unitSystem) {
 			if (unitSystem === 'celsius') {
 				$scope.unitSystem = unitSystem;
 				return 'active';
@@ -20,9 +20,5 @@
 				return 'active';
 			};
 		}
-
-        $scope.$watch('unitSystem', function(){
-			console.log($scope.unitSystem);
-        });
     }
 })();

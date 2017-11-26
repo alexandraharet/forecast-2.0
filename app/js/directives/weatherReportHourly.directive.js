@@ -8,7 +8,8 @@
             templateUrl: "templates/weatherReportHourly.html",
             scope: {
                 weather: "=",
-                timezoneOffset: '='
+                timezoneOffset: '=',
+                unitSystem: "="
             },
             link: function (scope, elm, attrs) {
                 var timezoneOffset = $interpolate(scope.timezoneOffset);
