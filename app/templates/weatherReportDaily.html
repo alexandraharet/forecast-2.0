@@ -1,4 +1,7 @@
-<p>{{daily.renderResult.time | date : 'EEE' : timezoneOffset }}</p>
+<p>{{daily.renderResult.time | date : 'EEE' : timezoneOffset }}
+    <span class="hidden-xs">({{daily.renderResult.time | date : 'd MMM' : timezoneOffset }})
+    </span>
+</p>
 <h4>{{hourly.renderResult.summary}}</h4>
 
 <img ng-src="img/{{daily.renderResult.icon}}.png?"/>
