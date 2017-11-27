@@ -9,12 +9,11 @@
     function service($http, $q) {
         var exports = {
             callWeatherApi: callWeatherApi,
-            convertToCelsius: convertToCelsius,
             convertToDate: convertToDate,
             convertToPercentage: convertToPercentage,
             convertToStandard: convertToStandard,
             convertToImperial: convertToImperial,
-            convertToMiles: convertToMiles
+            WeatherResultConstructor: WeatherResultConstructor
         };
         var weatherApiResponse;
 
@@ -40,6 +39,24 @@
             return deferred.promise;
         }
 
+        function WeatherResultConstructor(apiResponse, mainDataPoint, ...[a, b, c]) {
+			// var getLocalTime =  weatherService.convertToDate(apiResponse.time);
+			var data = {
+				icon: apiResponse[mainDataPoint].icon,
+				summary: apiResponse[mainDataPoint].summary,
+				windSpeed: Math.round(apiResponse[mainDataPoint].windSpeed),
+				precipitation: convertToPercentage(apiResponse[mainDataPoint].precipProbability),
+				temperature:  Math.round(apiResponse[mainDataPoint].temperature),
+				apparentTemperature: Math.round(apiResponse[mainDataPoint].apparentTemperature),
+                date: (a && b && c) ? convertToDate(apiResponse[a][b][c].time) : '',
+				minTemp: (a && b && c) ? Math.round(apiResponse[a][b][c].temperatureMin) : '',
+				maxTemp: (a && b && c) ? Math.round(apiResponse[a][b][c].temperatureMax) : '',
+				speedUnit: 'mph',
+				temperatureUnit: '°F'
+			}
+			return data;
+		};
+
         function convertToImperial(weatherData) {
             var result = {
                 temperature: convertToFahrenheit(weatherData.temperature) || '',
@@ -55,11 +72,11 @@
 
         function convertToStandard(weatherData) {
             var result = {
-                temperature: convertToCelsius(weatherData.temperature) || '',
-                apparentTemperature: convertToCelsius(weatherData.apparentTemperature) || '',
-                minTemp: convertToCelsius(weatherData.minTemp) || '',
-                maxTemp: convertToCelsius(weatherData.maxTemp) || '',
-                windSpeed: convertToKm(weatherData.windSpeed) || '',
+                temperature: !isNaN(weatherData.temperature) ? convertToCelsius(weatherData.temperature) : '',
+                apparentTemperature: !isNaN(weatherData.apparentTemperature) ? convertToCelsius(weatherData.apparentTemperature) : '',
+                minTemp: !isNaN(weatherData.minTemp) ? convertToCelsius(weatherData.minTemp) : '',
+                maxTemp: !isNaN(weatherData.maxTemp) ? convertToCelsius(weatherData.maxTemp) : '',
+                windSpeed: !isNaN(weatherData.windSpeed) ? convertToKm(weatherData.windSpeed) : '',
                 speedUnit: 'km/h',
                 temperatureUnit: '°C'
             }

@@ -14,24 +14,6 @@
 
 		var vm = this;
 
-		function buildRenderResultObject(weatherResult) {
-			var getLocalTime =  weatherService.convertToDate(weatherResult.currently.time);
-			vm.renderResult = {
-				icon: weatherResult.currently.icon,
-				summary: weatherResult.currently.summary,
-				windSpeed: Math.round(weatherResult.currently.windSpeed),
-				date: weatherService.convertToDate(weatherResult.daily.data[1].time),
-				precipitation: weatherService.convertToPercentage(weatherResult.currently.precipProbability),
-				temperature: Math.round(weatherResult.currently.apparentTemperature),
-				minTemp: Math.round(weatherResult.daily.data[1].temperatureMin),
-				maxTemp: Math.round(weatherResult.daily.data[1].temperatureMax),
-				speedUnit: 'mph',
-				temperatureUnit: '°F'
-			};
-			// TODO
-			// vm.localTime =  weatherService.convertToDate(weatherResult.currently.time);
-		}
-
 		function convertTimezoneOffset(rawOffset) {
 			var convertedOffset = '';
 			var str = (rawOffset * 100).toString();
@@ -60,14 +42,6 @@
 				convertedOffset += '00';
 			}
 			return convertedOffset;
-		};
-
-		var WeatherResultConstructor = function(apiResponse, mainDataPoint, ...[a, b, c]) {
-			this.temperature = apiResponse[mainDataPoint].apparentTemperature;
-			this.feelsLike = apiResponse[mainDataPoint].apparentTemperature;
-			this.maxTemp = apiResponse[a][b][c].temperatureMax;
-			this.date = apiResponse[a][b][c].time;
-			this.precipiation = apiResponse[a][b][c].precipProbability;
 		};
 
 		vm.address = "";
@@ -105,12 +79,9 @@
 						.then(
 							function(weatherResponse) {
 								vm.weatherResult = weatherResponse.data;
-								var renderResponse = new WeatherResultConstructor(weatherResponse.data, 'currently', 'daily', 'data', '1');
-								buildRenderResultObject(vm.weatherResult);
 								vm.loading = false;
 							});
 						})
-
 					};
 				}
 			})();

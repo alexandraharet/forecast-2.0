@@ -22,8 +22,11 @@
                 vm.renderResult = {};
                 vm.timezoneOffset = '';
 
-                updatedWeatherData();
-                updateRenderedResult();
+                $scope.$watch('weather', function(newVal, oldVal) {
+                    updatedWeatherData();
+                    updateRenderedResult();
+                });
+
 
                 function updatedWeatherData() {
                     weatherData = {
@@ -45,13 +48,16 @@
                     angular.forEach(weatherData, function(value, key) {
                         if(vm.renderResult[key] !== weatherData[key]) vm.renderResult[key] = value;
                     });
+                    if($scope.unitSystem === 'celsius') {
+                        angular.extend(vm.renderResult, weatherService.convertToStandard(vm.renderResult));
+                    }
                 }
 
                 $scope.$watch('unitSystem', function(newVal, oldVal) {
                     if (newVal === 'fahrenheit' && oldVal !== newVal) {
                         angular.extend(vm.renderResult, weatherService.convertToImperial(vm.renderResult));
                     }
-                    if (newVal === 'celsius') {
+                    if (newVal === 'celsius'  && oldVal !== newVal) {
                         angular.extend(vm.renderResult, weatherService.convertToStandard(vm.renderResult));
                     }
                 });

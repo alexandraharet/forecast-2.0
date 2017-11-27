@@ -16,20 +16,14 @@
                 var vm = this;
                 vm.renderResult = {};
 
-                updatedWeatherData();
-                updateRenderedResult();
+                $scope.$watch('weather', function(newVal, oldVal) {
+                    updatedWeatherData();
+                    updateRenderedResult();
+                });
+
 
                 function updatedWeatherData() {
-                    weatherData = {
-                        summary: $scope.weather.currently.summary,
-                        icon: $scope.weather.currently.icon,
-                        temperature: $scope.weather.currently.temperature,
-                        apparentTemperature: $scope.weather.currently.apparentTemperature,
-                        precipitation: weatherService.convertToPercentage($scope.weather.currently.precipProbability),
-                        windSpeed: $scope.weather.currently.windSpeed,
-                        speedUnit: 'mph',
-                        temperatureUnit: '°F'
-                    };
+                    weatherData = weatherService.WeatherResultConstructor($scope.weather, 'currently');
                 }
 
                 function updateRenderedResult() {
@@ -39,13 +33,16 @@
                             vm.renderResult[key] = value;
                         }
                     });
+                    if($scope.unitSystem === 'celsius') {
+                        angular.extend(vm.renderResult, weatherService.convertToStandard(vm.renderResult));
+                    }
                 }
 
-                $scope.$watch('unitSystem', function() {
-                    if ($scope.unitSystem === 'fahrenheit') {
+                $scope.$watch('unitSystem', function(newVal, oldVal) {
+                    if (newVal === 'fahrenheit' && oldVal !== newVal) {
                         angular.extend(vm.renderResult, weatherService.convertToImperial(vm.renderResult));
                     }
-                    if ($scope.unitSystem === 'celsius') {
+                    if (newVal === 'celsius' && oldVal !== newVal) {
                         angular.extend(vm.renderResult, weatherService.convertToStandard(vm.renderResult));
                     }
                 });
