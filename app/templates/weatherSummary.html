@@ -1,7 +1,19 @@
-<h4>{{ summary.renderResult.summary }} {{ summary.renderResult.temperature }}{{summary.renderResult.temperatureUnit}}
-    <small> / feels like
-        {{summary.renderResult.apparentTemperature}}{{summary.renderResult.temperatureUnit}}
+<div class="col-xs-12 col-md-3 col-sm-4">
+    <img ng-src="img/{{summary.renderResult.icon}}.png?" />
+</div>
+<div class="col-xs-12 col-sm-8 col-md-9 text-sm-left">
+<h4>{{ summary.renderResult.summary }}, {{ summary.renderResult.temperature }}{{summary.renderResult.temperatureUnit}}
+    <br>
+    <small>Feels like {{summary.renderResult.apparentTemperature}}{{summary.renderResult.temperatureUnit}}
     </small>
 </h4>
-<p>Precipitation: {{ summary.renderResult.precipitation }}%</p>
-<p>Wind speed: {{ summary.renderResult.windSpeed }} {{ summary.renderResult.speedUnit }}</p>
+<p class="has-icon"><span class="hidden-xs">Precipitation: </span>
+    <i class="icon precipitation"></i>
+    {{ summary.renderResult.precipitation }}%
+</p>
+<p class="has-icon">
+    <span class="hidden-xs">Wind speed: </span>
+    <i class="icon wind"></i>
+    {{ summary.renderResult.windSpeed }} {{ summary.renderResult.speedUnit }}
+</p>
+</div>

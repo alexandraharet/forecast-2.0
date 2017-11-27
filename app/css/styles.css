@@ -1,10 +1,10 @@
 body {
     color: white;
     min-height: 100vh;
-    background: url('../img/backgrounds/background-8.jpg');
+    background-image: url('../img/backgrounds/background-8-lg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: top left;
+    background-position: bottom center;
 }
 
 p {
@@ -98,6 +98,31 @@ weather-result.ng-animate {
     transition: visibility fade-in-out 10s;
 }
 
+.btn {
+  cursor: pointer;
+}
+
+#us-toggle {
+  position: relative;
+}
+
+#us-toggle .btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  opacity: 0;
+  border-radius: 2px;
+  width: 40px;
+  background-color: transparent;
+  border: 1px solid #e6e6e6;
+}
+
+#us-toggle .btn.active {
+  opacity: 1;
+  z-index: 1;
+}
+
 .btn-secondary:not(.toggle) {
     background-color: transparent;
     color: #fff;
@@ -162,15 +187,40 @@ wf-weather-report-daily:nth-of-type(2n) {
     background-color: rgba(0, 0, 0, 0.50);
 }
 
-/*xs and sm*/
-@media screen and (max-width: 575px) {
-    body {
-        font-size: 0.72em;
-    }
+
+/* xxl */
+@media (min-width: 2000px) {
+  body {
+    background-image: url('../img/backgrounds/background-8.jpg');
+  }
+}
+
+/* xl */
+@media (min-width: 1200px) {
+  body {
+    background-image: url('../img/backgrounds/background-8-xl.jpg');
+  }
+}
+
+/* lg */
+@media (min-width: 992px) {
+  body {
+    background-image: url('../img/backgrounds/background-8-lg.jpg');
+  }
+}
+
+/* md */
+@media (min-width: 768px) {
+  body {
+    background-image: url('../img/backgrounds/background-8-md.jpg');
+  }
 }
 
 /*sm and up*/
 @media (min-width: 576px) {
+    body {
+      background-image: url('../img/backgrounds/background-8-sm.jpg');
+    }
     form {
         padding-right:1em;
     }
@@ -183,11 +233,65 @@ wf-weather-report-daily:nth-of-type(2n) {
 
 /*xs*/
 @media (max-width: 577px) {
+  body {
+    font-size: 0.72em;
+    background-image: url('../img/backgrounds/background-8-xs.jpg');
+  }
   .title, .instructions {
     display: none;
   }
   .form-inline {
     margin-top: 2rem;
+  }
+
+
+  .btn-group.toggle {
+    width: 100%;
+  }
+
+  .btn.toggle {
+    width: 50%;
+  }
+
+.has-icon {
+  text-align: left;
+  position: relative;
+  padding-left: 25px;
+}
+.icon {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 5px;
+  width: 15px;
+  height: 15px;
+  display: block;
+  background-size: contain;
+}
+
+.icon.wind {
+  background-image: url('img/icon-wind.png');
+}
+
+.icon.temperature {
+  background-image: url('img/icon-temperature.png');
+}
+
+.icon.precipitation {
+  background-image: url('img/icon-precipitation.png');
+}
+
+wf-weather-summary .has-icon {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.text-center.float-left {
+  float: initial !important;
+}
+
+  .hidden-xs {
+    display: none;
   }
     #search-button {
         margin-top: 1em;

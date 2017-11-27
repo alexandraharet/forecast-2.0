@@ -1,6 +1,16 @@
 <p>{{hourly.renderResult.localtime | date : 'HH:mm' : timezoneOffset }}</p>
 <!-- <h4>{{hourly.renderResult.summary}}</h4> -->
 <img ng-src="img/{{hourly.renderResult.icon}}.png?"/>
-<p>Temp: {{hourly.renderResult.temperature}}{{hourly.renderResult.temperatureUnit}}</p>
-<p>Wind: {{hourly.renderResult.windSpeed}} {{hourly.renderResult.speedUnit}}</p>
-<p>Precip: {{hourly.renderResult.precipitation}}%</p>
+<p class="has-icon">
+    <i class="icon temperature"></i>
+    <span class="hidden-xs">Temp:</span>
+    {{hourly.renderResult.temperature}}{{hourly.renderResult.temperatureUnit}}
+</p>
+<p class="has-icon">
+    <span class="hidden-xs">Wind: </span>
+    <i class="icon wind"></i>
+    {{hourly.renderResult.windSpeed}} {{hourly.renderResult.speedUnit}}
+</p>
+<p class="hidden-xs">
+    Precip: {{hourly.renderResult.precipitation}}%
+</p>

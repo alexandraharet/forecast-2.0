@@ -2,9 +2,17 @@
 <h4>{{hourly.renderResult.summary}}</h4>
 
 <img ng-src="img/{{daily.renderResult.icon}}.png?"/>
-<p>Temp: {{daily.renderResult.maxTemp}}{{daily.renderResult.temperatureUnit}}
-    <small> / {{daily.renderResult.minTemp}}{{daily.renderResult.temperatureUnit}}</small>
+<p class="has-icon">
+    <span class="hidden-xs">Temp: </span>
+    <i class="icon temperature"></i>
+    {{daily.renderResult.maxTemp}}{{daily.renderResult.temperatureUnit}}
+    <small class="hidden-xs"> / {{daily.renderResult.minTemp}}{{daily.renderResult.temperatureUnit}}</small>
 </p>
-<p>Wind: {{daily.renderResult.windSpeed}} {{daily.renderResult.speedUnit}}</p>
-<p>Precip: {{daily.renderResult.precipitation}}%</p>
- 
+<p class="has-icon">
+    <span class="hidden-xs">Wind: </span>
+    <i class="icon wind"></i>
+    {{daily.renderResult.windSpeed}} {{daily.renderResult.speedUnit}}
+</p>
+<p class="hidden-xs">
+    Precip: {{daily.renderResult.precipitation}}%
+</p>

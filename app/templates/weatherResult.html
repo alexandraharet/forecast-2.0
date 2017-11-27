@@ -6,7 +6,7 @@
             <div class="col">
                 <h3 class="text-center text-sm-left float-left">{{ mainCtrl.formattedAddress }}</h3>
 
-                <div class="btn-group toggle float-right" >
+                <div class="btn-group toggle float-right" id="us-toggle">
                     <label class="btn btn-secondary btn-sm toggle" ng-class="selectCelsius(unitSystem)">
                         <input type="radio" ng-model="unitSystem" value="celsius"
                                name="options" id="celsius" autocomplete="off" ng-click="weatherResult.changeUnitSystem(celsius)"/>
@@ -20,16 +20,11 @@
                 </div>
             </div>
         </div>
-        <div class="row w-currently text-center">
-            <div class="col-xs-12 col-md-3 col-sm-4">
-                <img ng-src="img/{{mainCtrl.renderResult.icon}}.png?" />
-            </div>
-            <wf-weather-summary class="col-xs-12 col-sm-8 col-md-9 text-sm-left"
+            <wf-weather-summary class="row w-currently text-center"
                     ng-if="mainCtrl.weatherResult"
                     weather="mainCtrl.weatherResult"
                     unit-system="unitSystem">
             </wf-weather-summary>
-        </div>
 
         <div class="row">
             <div class="col">
@@ -46,11 +41,10 @@
                 </label>
             </div>
 
-                <!-- TODO -->
-                <!-- <wf-local-time timezone-offset="mainCtrl.timezoneOffset">
+
+            <!-- TODO -->
+            <!-- <wf-local-time timezone-offset="mainCtrl.timezoneOffset">
             </wf-local-time> -->
-            <!-- <a ng-click="timeframe = '24h'">Right now</a> |
-            <a ng-click="timeframe = '7days'">7 days</a> -->
         </div>
     </div>
 
