@@ -52,15 +52,14 @@
                     weatherService.convertToDate(weatherResult.time)
                 }
 
-                $scope.$watch('unitSystem', function() {
-                    if ($scope.unitSystem === 'fahrenheit') {
+                $scope.$watch('unitSystem', function(newVal, oldVal) {
+                    if (newVal === 'fahrenheit' && oldVal !== newVal) {
                         angular.extend(vm.renderResult, weatherService.convertToImperial(vm.renderResult));
                     }
-                    if ($scope.unitSystem === 'celsius') {
+                    if (newVal === 'celsius') {
                         angular.extend(vm.renderResult, weatherService.convertToStandard(vm.renderResult));
                     }
                 });
-
             }],
             controllerAs: 'hourly'
         };

@@ -20,15 +20,16 @@
 				icon: weatherResult.currently.icon,
 				summary: weatherResult.currently.summary,
 				windSpeed: Math.round(weatherResult.currently.windSpeed),
-				localTime: getLocalTime,
 				date: weatherService.convertToDate(weatherResult.daily.data[1].time),
 				precipitation: weatherService.convertToPercentage(weatherResult.currently.precipProbability),
-				temperature: weatherResult.currently.apparentTemperature,
-				minTemp: weatherResult.daily.data[1].temperatureMin,
-				maxTemp: weatherResult.daily.data[1].temperatureMax,
+				temperature: Math.round(weatherResult.currently.apparentTemperature),
+				minTemp: Math.round(weatherResult.daily.data[1].temperatureMin),
+				maxTemp: Math.round(weatherResult.daily.data[1].temperatureMax),
 				speedUnit: 'mph',
 				temperatureUnit: '°F'
 			};
+			// TODO
+			// vm.localTime =  weatherService.convertToDate(weatherResult.currently.time);
 		}
 
 		function convertTimezoneOffset(rawOffset) {

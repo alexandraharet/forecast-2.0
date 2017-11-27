@@ -30,10 +30,10 @@
                         time: weatherService.convertToDate($scope.weather.time),
                         summary: $scope.weather.summary,
                         icon: $scope.weather.icon,
-                        minTemp: $scope.weather.temperatureMin,
-                        maxTemp: $scope.weather.temperatureMax,
+                        minTemp: Math.round($scope.weather.temperatureMin),
+                        maxTemp: Math.round($scope.weather.temperatureMax),
                         precipitation: weatherService.convertToPercentage($scope.weather.precipProbability),
-                        windSpeed: $scope.weather.windSpeed,
+                        windSpeed: Math.round($scope.weather.windSpeed),
                         speedUnit: 'mph',
                         temperatureUnit: '°F'
                     };
@@ -47,11 +47,11 @@
                     });
                 }
 
-                $scope.$watch('unitSystem', function() {
-                    if ($scope.unitSystem === 'fahrenheit') {
+                $scope.$watch('unitSystem', function(newVal, oldVal) {
+                    if (newVal === 'fahrenheit' && oldVal !== newVal) {
                         angular.extend(vm.renderResult, weatherService.convertToImperial(vm.renderResult));
                     }
-                    if ($scope.unitSystem === 'celsius') {
+                    if (newVal === 'celsius') {
                         angular.extend(vm.renderResult, weatherService.convertToStandard(vm.renderResult));
                     }
                 });

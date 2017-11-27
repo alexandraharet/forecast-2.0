@@ -31,6 +31,15 @@
             return weatherApiResponse;
         }
 
+        function callWeatherApi(lat, lon) {
+            var deferred = $q.defer();
+            if(getWeatherFromApi(lat, lon)) {
+                deferred.resolve(weatherApiResponse);
+            }
+            else deferred.reject('Error returing the weaherApi response');
+            return deferred.promise;
+        }
+
         function convertToImperial(weatherData) {
             var result = {
                 temperature: convertToFahrenheit(weatherData.temperature) || '',
@@ -57,14 +66,6 @@
             return result;
 		}
 
-        function callWeatherApi(lat, lon) {
-            var deferred = $q.defer();
-            if(getWeatherFromApi(lat, lon)) {
-                deferred.resolve(weatherApiResponse);
-            }
-            else deferred.reject('Error returing the weaherApi response');
-            return deferred.promise;
-        }
 
         function convertToMiles(km) {
             return km ? Math.round(km * 0.621371) : null;
