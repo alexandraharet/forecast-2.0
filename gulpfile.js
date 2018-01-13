@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var minifyJs = require('gulp-uglify');
+var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var minifyCss = require('gulp-clean-css');
@@ -10,6 +10,7 @@ var insertLines = require('gulp-insert-lines');
 var inject = require('gulp-inject');
 var postcss      = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
+var pump = require('pump');
 
 paths = {
   src: "app/",
@@ -66,12 +67,21 @@ gulp.task('dev-add-scripts', function() {
 });
 
 //BUILD AND COPY TASKS
-gulp.task('build-js', function() {
+gulp.task('build-js', function(cb) {
   return gulp.src([paths.src + 'js/app.js', paths.src + 'js/directives/*.js', paths.src + 'js/controllers/*.js', paths.src + 'js/services/*.js'])
   .pipe(concat('scripts.min.js'))
-  .pipe(minifyJs())
   .pipe(gulp.dest(paths.dest));
 });
+
+// gulp.task('minify-js', function (cb) {
+//   pump([
+//         gulp.src([paths.src + 'js/app.js', paths.src + 'js/directives/*.js', paths.src + 'js/controllers/*.js', paths.src + 'js/services/*.js']),
+//         concat('scripts.min.js'),
+//         gulp.dest(paths.dest)
+//     ],
+//     cb
+//   );
+// });
 
 gulp.task('dev-build-js', function() {
   return gulp.src([paths.src + 'js/**/*.js'])

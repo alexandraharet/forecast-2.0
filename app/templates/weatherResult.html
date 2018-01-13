@@ -1,69 +1,58 @@
-<div ng-if="mainCtrl.submitted " id='mainPanel' ng-controller="switchUnitsController as switchUnitsCtrl">
+<div ng-if="mainCtrl.submitted" id='mainPanel' ng-controller="switchUnitsController as switchUnitsCtrl">
     <div class="loader" ng-if="mainCtrl.loading"></div>
     <div ng-show="!mainCtrl.loading" class="fade-in" ng-controller="switchViewController as switchViewCtrl">
-
         <div class="row w-header text-center text-sm-left">
             <div class="col">
-                <h3 class="text-center text-sm-left float-left">{{ mainCtrl.formattedAddress }}</h3>
+                <h3 class="text-center text-sm-left">{{ mainCtrl.formattedAddress }}</h3>
+                <p class="local-time">
+                    Local time: {{mainCtrl.localTime | date : "h:mm a, EEEE, dd MMMM yyyy" : mainCtrl.timezoneOffset}}
+                </p>
 
                 <div class="btn-group toggle float-right" id="us-toggle">
                     <label class="btn btn-secondary btn-sm toggle" ng-class="selectCelsius(unitSystem)">
-                        <input type="radio" ng-model="unitSystem" value="celsius"
-                               name="options" id="celsius" autocomplete="off" ng-click="weatherResult.changeUnitSystem(celsius)"/>
-                        °C
+                        <input type="radio" ng-model="unitSystem" value="celsius" name="options" id="celsius" autocomplete="off" ng-click="weatherResult.changeUnitSystem(celsius)"/>
+                        °F
                     </label>
                     <label class="btn btn-secondary btn-sm toggle" ng-class="selectFahrenheit(unitSystem)">
-                        <input type="radio" ng-model="unitSystem" value="fahrenheit" ng-click="weatherResult.changeUnitSystem(fahrenheit)"
-                               name="options" id="fahrenheit" autocomplete="off" ng-checked/>
-                        °F
+                        <input type="radio" ng-model="unitSystem" value="fahrenheit" ng-click="weatherResult.changeUnitSystem(fahrenheit)" name="options" id="fahrenheit" autocomplete="off" ng-checked/>
+                        °C
                     </label>
                 </div>
             </div>
         </div>
-            <wf-weather-summary class="row w-currently text-center"
-                    ng-if="mainCtrl.weatherResult"
-                    weather="mainCtrl.weatherResult"
-                    unit-system="unitSystem">
-            </wf-weather-summary>
+        <wf-weather-summary class="row w-currently text-center" ng-if="mainCtrl.weatherResult" weather="mainCtrl.weatherResult" unit-system="unitSystem">
+        </wf-weather-summary>
 
         <div class="row">
             <div class="col">
-            <div class="btn-group toggle float-right">
-                <label class="btn btn-secondary btn-sm toggle" ng-class="showHourly(selectedView)">
-                    <input type="radio" ng-model="selectedView" value="hourly"
-                           name="options" id="option1" autocomplete="off"/>
-                    Hourly
-                </label>
-                <label class="btn btn-secondary btn-sm toggle" ng-class="showDaily(selectedView)">
-                    <input type="radio" ng-model="selectedView" value="daily"
-                           name="options" id="option2" autocomplete="off" ng-checked/>
-                    Daily
-                </label>
-            </div>
+                <div class="btn-group toggle float-right">
+                    <label class="btn btn-secondary btn-sm toggle" ng-class="showHourly(selectedView)">
+                        <input type="radio" ng-model="selectedView" value="hourly"
+                        name="options" id="option1" autocomplete="off"/>
+                        Hourly
+                    </label>
+                    <label class="btn btn-secondary btn-sm toggle" ng-class="showDaily(selectedView)">
+                        <input type="radio" ng-model="selectedView" value="daily"
+                        name="options" id="option2" autocomplete="off" ng-checked/>
+                        Daily
+                    </label>
+                </div>
 
 
-            <!-- TODO -->
-            <!-- <wf-local-time timezone-offset="mainCtrl.timezoneOffset">
+                <!-- TODO -->
+                <!-- <wf-local-time timezone-offset="mainCtrl.timezoneOffset">
             </wf-local-time> -->
         </div>
     </div>
 
     <div ng-switch="selectedView">
         <div ng-switch-when="hourly" class="fade-in">
-            <wf-weather-wrapper-hourly class="row no-gutters align-items-center w-hourly"
-                                ng-if="mainCtrl.weatherResult"
-                                timezone-offset="mainCtrl.timezoneOffset"
-                                weather-result="mainCtrl.weatherResult"
-                                unit-system="unitSystem">
+            <wf-weather-wrapper-hourly class="row no-gutters align-items-center w-hourly" ng-if="mainCtrl.weatherResult" timezone-offset="mainCtrl.timezoneOffset" weather-result="mainCtrl.weatherResult" unit-system="unitSystem">
             </wf-weather-wrapper-hourly>
         </div>
 
         <div ng-switch-when="daily" class="fade-in">
-            <wf-weather-wrapper-daily class="row no-gutters align-items-center w-hourly"
-                                ng-if="mainCtrl.weatherResult"
-                                timezone-offset="mainCtrl.timezoneOffset"
-                                weather-result="mainCtrl.weatherResult"
-                                unit-system="unitSystem">
+            <wf-weather-wrapper-daily class="row no-gutters align-items-center w-hourly" ng-if="mainCtrl.weatherResult" timezone-offset="mainCtrl.timezoneOffset" weather-result="mainCtrl.weatherResult" unit-system="unitSystem">
             </wf-weather-wrapper-daily>
         </div>
     </div>

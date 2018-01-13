@@ -10,11 +10,21 @@
         var exports = {
             callTimezoneApi: callTimezoneApi
         };
-        var timezoneApiResponse= '';
+        var timezoneApiResponse;
 
         function getTimezoneFromApi(lat, lon) {
-            var timeStamp = Math.floor(Date.now() / 1000)
-            timezoneApiResponse = $http.get('https://maps.googleapis.com/maps/api/timezone/json?location=' + lat + ',' + lon + '&timestamp=' + timeStamp + '&key=AIzaSyAsOiLqL4k2xnWSbGmFzmdwaWMhAmyZ5Ss');
+            var timestamp = Math.floor(Date.now() / 1000);
+
+            timezoneApiResponse = $http({
+                url: 'php/timezone.php',
+                method: 'get',
+                params: {
+                    lat: lat,
+                    lon: lon,
+                    timestamp: timestamp
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
             return timezoneApiResponse;
         }
 

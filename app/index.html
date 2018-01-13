@@ -25,21 +25,25 @@
 	<div class="container">
 		<div class="row" ng-controller="mainController as mainCtrl">
 			<div class="col">
-				<h4 class='title'>Weather forecast </h4>
+				<h4 class='title'>Weather forecast</h4>
 
-				<p class='instructions'>Type in an address as specific as you want to get the the current weather, as well as the forcast for the next hours or days:</p>
+				<p class='instructions'>Type in an address as specific as you want to get the the current weather, as well as the forecast for the next hours or days:</p>
 				<form ng-submit="mainCtrl.submit()" autocomplete="off" class="form-inline">
 					<input type="text" ng-model="mainCtrl.address" class="form-control col-12 col-sm-8" />
 					<input type="submit" value="Get forecast" id="search-button" class="btn btn-secondary col-12 col-sm-4" />
 				</form>
 				<wf-weather-result>
 				</wf-weather-result>
+
+                <div ng-if="mainCtrl.noAddress" class="no-address ng-cloak">
+					<h3>Please enter an address to get the forecast.</h3>
+                </div>
 			</div>
 		</div>
 	</div>
 
 	<!-- inject:js -->
   	<!-- endinject -->
-	
+
 </body>
 </html>

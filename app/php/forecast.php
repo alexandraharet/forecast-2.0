@@ -8,13 +8,10 @@ include('api-keys.php');
 
 $api_weather = 'https://api.darksky.net/forecast/';
 $api_key = $darkskykey;
-// $coordinates = $_GET['coordinates'];
 $lat = $_GET['lat'];
 $lon = $_GET['lon'];
 
-// $units = $_GET['units'];
 $url = $api_weather . $api_key . '/' . $lat . ',' . $lon . '?exclude=minutely,flags' ;
-// $units=' . $units;
 $curl = curl_init($url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 $curl_response = curl_exec($curl);

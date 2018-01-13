@@ -31,7 +31,7 @@ small {
     margin: 2rem auto 1rem;
 }
 
-.instructions {
+.instructions, .local-time {
   margin-bottom: 1rem;
   color: rgba(225, 225, 225, 0.9);
 }
@@ -61,7 +61,11 @@ small {
   border-bottom-right-radius: 0;
 }
 
-
+.no-address h3 {
+    margin: 2rem auto;
+    font-size: 1.2rem;
+    max-width: 80%;
+}
 
 .loader {
     display: block;

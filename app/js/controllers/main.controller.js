@@ -5,7 +5,7 @@
 	.module('weatherApp')
 	.controller('mainController', controller);
 
-    controller.$inject = ["$rootScope", "$scope", "addressService", "weatherService", "timezoneService"];
+	controller.$inject = ["$rootScope", "$scope", "addressService", "weatherService", "timezoneService"];
 
 
 	function controller($rootScope, $scope, addressService, weatherService, timezoneService) {
@@ -54,11 +54,12 @@
 		vm.loading = false;
 
 		vm.submit = function() {
-			vm.submitted = true;
-			vm.loading = true;
-			addressService.callLocationApi(vm.address)
-			.then(
-				function(addressResponse){
+			if(vm.address) {
+				vm.noAddress = false;
+				vm.submitted = true;
+				vm.loading = true;
+				addressService.callLocationApi(vm.address)
+				.then( function(addressResponse){
 					vm.formattedAddress = addressService.getFormattedAddress(addressResponse);
 					coordinates = addressService.getCoordinates(addressResponse);
 					return coordinates;
@@ -66,22 +67,23 @@
 				function(error) {
 					console.log(error);
 				})
-				.then(
-					function(coordinates) {
-						timezoneService.callTimezoneApi(coordinates.lat, coordinates.lon)
-						.then(
-							function(timezoneResponse) {
-								var rawOffset = (timezoneResponse.data.rawOffset + timezoneResponse.data.dstOffset)/3600;
-								vm.timezoneOffset = convertTimezoneOffset(rawOffset);
-							}
-						);
-						weatherService.callWeatherApi(coordinates.lat, coordinates.lon)
-						.then(
-							function(weatherResponse) {
-								vm.weatherResult = weatherResponse.data;
-								vm.loading = false;
-							});
-						})
-					};
-				}
-			})();
+				.then( function(coordinates) {
+					timezoneService.callTimezoneApi(coordinates.lat, coordinates.lon)
+					.then( function(timezoneResponse) {
+						var rawOffset = (timezoneResponse.data.rawOffset + timezoneResponse.data.dstOffset)/3600;
+						vm.timezoneOffset = convertTimezoneOffset(rawOffset);
+						vm.localTime = new Date();
+					}
+				);
+				weatherService.callWeatherApi(coordinates.lat, coordinates.lon)
+				.then( function(weatherResponse) {
+					vm.weatherResult = weatherResponse.data;
+					vm.loading = false;
+				});
+			})
+		} else {
+			vm.noAddress = true;
+		}
+	};
+}
+})();
