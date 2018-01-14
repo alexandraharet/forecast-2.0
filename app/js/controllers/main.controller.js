@@ -60,12 +60,12 @@
 				vm.loading = true;
 				addressService.callLocationApi(vm.address)
 				.then( function(addressResponse){
-					vm.formattedAddress = addressService.getFormattedAddress(addressResponse);
-					coordinates = addressService.getCoordinates(addressResponse);
-					return coordinates;
-				},
-				function(error) {
-					console.log(error);
+					if (addressResponse.data.status !== 'ZERO_RESULTS') {
+						vm.addressError = false;
+						vm.formattedAddress = addressService.getFormattedAddress(addressResponse);
+						coordinates = addressService.getCoordinates(addressResponse);
+						return coordinates;
+					}
 				})
 				.then( function(coordinates) {
 					timezoneService.callTimezoneApi(coordinates.lat, coordinates.lon)
@@ -73,17 +73,16 @@
 						var rawOffset = (timezoneResponse.data.rawOffset + timezoneResponse.data.dstOffset)/3600;
 						vm.timezoneOffset = convertTimezoneOffset(rawOffset);
 						vm.localTime = new Date();
-					}
-				);
-				weatherService.callWeatherApi(coordinates.lat, coordinates.lon)
-				.then( function(weatherResponse) {
-					vm.weatherResult = weatherResponse.data;
-					vm.loading = false;
-				});
-			})
-		} else {
-			vm.noAddress = true;
-		}
-	};
-}
+					});
+					weatherService.callWeatherApi(coordinates.lat, coordinates.lon)
+					.then( function(weatherResponse) {
+						vm.weatherResult = weatherResponse.data;
+						vm.loading = false;
+					});
+				})
+			} else {
+				vm.noAddress = true;
+			}
+		};
+	}
 })();
