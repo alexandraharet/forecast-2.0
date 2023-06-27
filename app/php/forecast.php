@@ -6,8 +6,8 @@
 
 include('api-keys.php');
 
-$api_weather = 'https://api.darksky.net/forecast/';
-$api_key = $darkskykey;
+$api_weather = 'https://api.pirateweather.net/forecast/';
+$api_key = $weatherpiratekey;
 $lat = $_GET['lat'];
 $lon = $_GET['lon'];
 
